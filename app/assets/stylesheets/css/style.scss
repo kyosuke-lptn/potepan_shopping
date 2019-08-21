@@ -2975,6 +2975,10 @@ body.bodyColor.container {
   }
 }
 
+div#show-product-thumb:nth-child(4n) {
+  margin-right: 0px !important;
+}
+
 /*=== 7.3 CART PRODUCTS ===*/
 .cartListInner .updateArea .input-group .form-control, .cartListInner .updateArea .input-group .input-group-addon, .cartListInner .updateArea .btn {
   border-radius: 0;
