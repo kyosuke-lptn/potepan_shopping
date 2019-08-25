@@ -30,6 +30,7 @@ describe 'Products機能', type: :system do
     context '商品詳細情報の表示' do
       subject { page }
 
+      it { is_expected.to have_title "Single Product - BIGBAG Store" }
       it { is_expected.to have_content product.name }
       it { is_expected.to have_content product.price }
       it { is_expected.to have_content product.description }

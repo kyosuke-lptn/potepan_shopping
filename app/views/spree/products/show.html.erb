@@ -8,44 +8,32 @@
           <div class="media-left productSlider">
             <div id="carousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
-                <% n = 0 %>
-                <% active = 'active' %>
-                <% if (@product.images + @product.variant_images).uniq.size > 1 %>
-                  <% @product.images.each do |i| %>
-                    <div class="item <%= active %>" data-thumb="<%= n %>">
-                      <%= image_tag i.attachment(:large), itemprop: 'image' %>
+                <% if @product_images.size > 1 %>
+                  <% @product_images.each_index do |idx| %>
+                    <div class="item <%= 'active' if idx == 0%>" data-thumb="<%= idx %>">
+                      <%= image_tag @product_images[idx].attachment(:large), itemprop: 'image' %>
                     </div>
-                    <% n += 1 %>
-                    <% active = '' %>
                   <% end %>
-                  <% if @product.has_variants? %>
-                    <% @product.variant_images.each do |i| %>
-                      <% next if @product.images.include?(i) %>
-                        <div class="item <%= active %>" data-thumb="<%= n %>">
-                          <%= image_tag i.attachment(:large), itemprop: 'image' %>
-                        </div>
-                        <% n += 1 %>
-                    <% end %>
-                  <% end %>
+                <% else %>
+                    <div class="item active" data-thumb="0">
+                      <%= image_tag @product.display_image.attachment(:large), itemprop: 'image' %>
+                    </div>
                 <% end %>
               </div>
             </div>
             <div class="clearfix">
               <div id="thumbcarousel" class="carousel slide" data-interval="false">
                 <div class="carousel-inner">
-                  <% n = 0 %>
-                  <% if (@product.images + @product.variant_images).uniq.size > 1 %>
-                    <% @product.images.each do |i| %>
-                      <div data-target="#carousel" data-slide-to="<%= n %>" class="thumb" id="show-product-thumb"><%= link_to(image_tag(i.attachment.url(:product)), i.attachment.url(:product)) %></div>
-                      <% n += 1 %>
+                  <% if @product_images.size > 1 %>
+                    <% @product_images.each_index do |idx| %>
+                      <div data-target="#carousel" data-slide-to="<%= idx %>" class="thumb" id="show-product-thumb">
+                        <%= link_to(image_tag(@product_images[idx].attachment.url(:product)), @product_images[idx].attachment.url(:product)) %>
+                      </div>
                     <% end %>
-                    <% if @product.has_variants? %>
-                      <% @product.variant_images.each do |i| %>
-                        <% next if @product.images.include?(i) %>
-                        <div data-target="#carousel" data-slide-to="<%= n %>" class="thumb" id="show-product-thumb"><%= link_to(image_tag(i.attachment.url(:product)), i.attachment.url(:product)) %></div>
-                        <% n += 1 %>
-                      <% end %>
-                    <% end %>
+                  <% else %>
+                    <div data-target="#carousel" data-slide-to="0" class="thumb" id="show-product-thumb">
+                      <%= image_tag @product.display_image.attachment.url(:product) %>
+                    </div>
                   <% end %>
                 </div>
                 <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
@@ -66,13 +54,11 @@
             <h3>$<%= @product.price %></h3>
             <p><%= product_description(@product) %></p>
             <% if @product.has_variants? %>
-              <% n = 0 %>
               <% @product.variant_option_values_by_option_type.each_value do |values| %>
                 <span class="quick-drop">
                   <select name="guiest_id3" id="guiest_id3" class="select-drop">
-                    <% values.each do |value| %>
-                      <option value="<%= n %>"><%=  value.presentation %></option>
-                      <% n += 1 %>
+                    <% values.each_with_index do |value, index| %>
+                      <option value="<%= index %>"><%=  value.presentation %></option>
                     <% end %>
                   </select>
                 </span>
@@ -81,9 +67,9 @@
             <span class="quick-drop resizeWidth">
               <select name="guiest_id4" id="guiest_id4" class="select-drop">
               <!--   <option value="0">Qty</option> -->
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <% (1..4).each do |number| %>
+                  <option value="<%= number %>"><%= number %></option>
+                <% end %>
               </select>
             </span>
             <div class="btn-area">

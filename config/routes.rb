@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # We ask that you don't use the :as option here,
   # as Solidus relies on it being the default of "spree"
 
-  mount Spree::Core::Engine, at: '/potepan'
+  mount Spree::Core::Engine, at: '/'
 
   namespace :potepan do
     get '/',                        to: 'sample#index'
@@ -27,6 +27,10 @@ Rails.application.routes.draw do
     get :about_us,                  to: 'sample#about_us'
     get :tokushoho,                 to: 'sample#tokushoho'
     get :privacy_policy,            to: 'sample#privacy_policy'
+  end
+
+  scope '/potepan' do
+    resources :products, only: :show, controller: 'spree/products'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
