@@ -3,27 +3,24 @@ require 'rails_helper'
 describe 'Products機能', type: :system do
   let!(:product) { create(:product, name: "sample2") }
   let!(:product2) { create(:product, name: "sample1") }
+  let!(:taxonomy) { create(:taxonomy) }
+  let!(:root_taxon) { taxonomy.root }
+  let!(:parent_taxon) { create(:taxon,
+                         name: 'Parent',
+                         taxonomy_id: taxonomy.id,
+                         parent: root_taxon) }
+  let!(:child_taxon) { create(:taxon,
+                        name: 'Child 1',
+                        taxonomy_id: taxonomy.id,
+                        parent: parent_taxon) }
+  let!(:image) { File.open(File.expand_path('../fixtures/thinking-cat.jpg', __dir__)) }
+  let!(:product_image) { product.images.create!(attachment: image) }
+  let!(:product_image2) { product.images.create!(attachment: image) }
+  let!(:product_taxons) { [parent_taxon, child_taxon].each{ |t| product.taxons << t } }
+  let!(:product_taxons2) { [parent_taxon, child_taxon].each{ |t| product2.taxons << t } }
 
   describe '詳細表示機能' do
     before do
-      @taxonomy = create(:taxonomy)
-      @root_taxon = @taxonomy.root
-      @parent_taxon = create(:taxon,
-                             name: 'Parent',
-                             taxonomy_id: @taxonomy.id,
-                             parent: @root_taxon)
-      @child_taxon = create(:taxon,
-                            name: 'Child 1',
-                            taxonomy_id: @taxonomy.id,
-                            parent: @parent_taxon)
-      @parent_taxon.reload # Need to reload for descendents to show up
-      product.taxons << @parent_taxon
-      product.taxons << @child_taxon
-      product2.taxons << @parent_taxon
-      product2.taxons << @child_taxon
-      image = File.open(File.expand_path('../fixtures/thinking-cat.jpg', __dir__))
-      product.images.create!(attachment: image)
-      product.images.create!(attachment: image)
       visit "potepan/products/#{product.slug}"
     end
 
