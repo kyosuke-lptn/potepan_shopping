@@ -9,7 +9,6 @@ require 'rspec/rails'
 #
 # solidus
 require 'spree/testing_support/factories'
-Dir["/spree/testing_support/*.rb"].each { |file| require file }
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 

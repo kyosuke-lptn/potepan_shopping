@@ -22,7 +22,7 @@
 
   <body>
     <div class="main-wrapper">
-      <%= render 'layouts/header' %>
+      <%= render 'layouts/header', header_title: yield(:header_title) %>
       <%= yield %>
       <%= render 'layouts/footer' %>
     </div>

@@ -1,4 +1,5 @@
-<%= provide(:title, "Single Product") %>
+<%= provide(:title, @product.name) %>
+<%= provide(:header_title, @product.name) %>
   <!-- MAIN CONTENT SECTION -->
 <section class="mainContent clearfix">
   <div class="container">
@@ -9,9 +10,9 @@
             <div id="carousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <% if @product_images.size > 1 %>
-                  <% @product_images.each_index do |idx| %>
+                  <% @product_images.each_with_index do |product_image, idx| %>
                     <div class="item <%= 'active' if idx == 0%>" data-thumb="<%= idx %>">
-                      <%= image_tag @product_images[idx].attachment(:large), itemprop: 'image' %>
+                      <%= image_tag product_image.attachment(:large), itemprop: 'image' %>
                     </div>
                   <% end %>
                 <% else %>
@@ -25,14 +26,14 @@
               <div id="thumbcarousel" class="carousel slide" data-interval="false">
                 <div class="carousel-inner">
                   <% if @product_images.size > 1 %>
-                    <% @product_images.each_index do |idx| %>
+                    <% @product_images.each_with_index do |product_image, idx| %>
                       <div data-target="#carousel" data-slide-to="<%= idx %>" class="thumb" id="show-product-thumb">
-                        <%= link_to(image_tag(@product_images[idx].attachment.url(:product)), @product_images[idx].attachment.url(:product)) %>
+                        <%= link_to(image_tag(product_image.attachment.url(:product)), product_image.attachment.url(:product)) %>
                       </div>
                     <% end %>
                   <% else %>
                     <div data-target="#carousel" data-slide-to="0" class="thumb" id="show-product-thumb">
-                      <%= image_tag @product.display_image.attachment.url(:product) %>
+                      <%= image_tag @product.display_image.attachment.url(:product), :alt => "product-thumb-img" %>
                     </div>
                   <% end %>
                 </div>
@@ -113,17 +114,17 @@
           <h4>関連商品</h4>
         </div>
       </div>
-      <% taxon_preview(@product.taxons.shuffle.first, max = 4).each do |p| %>
+      <% taxon_preview(@product.taxons.shuffle.first, max = 4).each do |product| %>
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="productBox">
             <div class="productImage clearfix">
-              <a href="<%= product_path(p) %>">
-                <%= image_tag(p.display_image.attachment(:product), :alt => "products-img") %>
+              <a href="<%= product_path(product) %>">
+                <%= image_tag(product.display_image.attachment(:product), :alt => "products-img") %>
               </a>
             </div>
             <div class="productCaption clearfix">
-             <h5><%= p.name %></h5>
-             <h3><%= p.price %></h3>
+             <h5><%= product.name %></h5>
+             <h3><%= product.price %></h3>
             </div>
           </div>
         </div>
