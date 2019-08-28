@@ -14,4 +14,4 @@ AllCops:
     - 'vendor/**/*'
     - 'path/ruby'
     - 'spec/spec_helper.rb'
-    - 'spec/support/selenium_chrom.rb'
+    - 'spec/support/selenium_chrome.rb'

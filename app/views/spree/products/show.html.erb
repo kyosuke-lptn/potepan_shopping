@@ -11,14 +11,14 @@
               <div class="carousel-inner">
                 <% if @product_images.size > 1 %>
                   <% @product_images.each_with_index do |product_image, idx| %>
-                    <div class="item <%= 'active' if idx == 0%>" data-thumb="<%= idx %>">
+                    <div class="item <%= 'active' if idx.zero? %>" data-thumb="<%= idx %>">
                       <%= image_tag product_image.attachment(:large), itemprop: 'image' %>
                     </div>
                   <% end %>
                 <% else %>
-                    <div class="item active" data-thumb="0">
-                      <%= image_tag @product.display_image.attachment(:large), itemprop: 'image' %>
-                    </div>
+                  <div class="item active" data-thumb="0">
+                    <%= image_tag @product.display_image.attachment(:large), itemprop: 'image' %>
+                  </div>
                 <% end %>
               </div>
             </div>
@@ -59,7 +59,7 @@
                 <span class="quick-drop">
                   <select name="guiest_id3" id="guiest_id3" class="select-drop">
                     <% values.each_with_index do |value, index| %>
-                      <option value="<%= index %>"><%=  value.presentation %></option>
+                      <option value="<%= index %>"><%= value.presentation %></option>
                     <% end %>
                   </select>
                 </span>
@@ -67,8 +67,7 @@
             <% end %>
             <span class="quick-drop resizeWidth">
               <select name="guiest_id4" id="guiest_id4" class="select-drop">
-              <!--   <option value="0">Qty</option> -->
-                <% (1..4).each do |number| %>
+                <% (1..5).each do |number| %>
                   <option value="<%= number %>"><%= number %></option>
                 <% end %>
               </select>
@@ -114,21 +113,50 @@
           <h4>関連商品</h4>
         </div>
       </div>
-      <% taxon_preview(@product.taxons.shuffle.first, max = 4).each do |product| %>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="productBox">
-            <div class="productImage clearfix">
-              <a href="<%= product_path(product) %>">
-                <%= image_tag(product.display_image.attachment(:product), :alt => "products-img") %>
-              </a>
-            </div>
-            <div class="productCaption clearfix">
-             <h5><%= product.name %></h5>
-             <h3><%= product.price %></h3>
-            </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-01.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+            <h5>Nike Sportswear</h5>
+            <h3>199円</h3>
           </div>
         </div>
-      <% end %>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-02.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+            <h5>Dip Dyed Sweater</h5>
+            <h3>249円</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-03.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+            <h5>Scarf Ring Corner</h5>
+            <h3>179円</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="productBox">
+          <div class="productImage clearfix">
+            <%= image_tag("img/products/products-04.jpg", :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+            <h5>Sun Buddies</h5>
+            <h3>149円</h3>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
