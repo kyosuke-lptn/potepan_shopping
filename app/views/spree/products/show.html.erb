@@ -9,7 +9,7 @@
           <div class="media-left productSlider">
             <div id="carousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
-                <% if @product_images.size > 1 %>
+                <% if @product_images %>
                   <% @product_images.each_with_index do |product_image, idx| %>
                     <div class="item <%= 'active' if idx.zero? %>" data-thumb="<%= idx %>">
                       <%= image_tag product_image.attachment(:large), itemprop: 'image' %>
@@ -25,10 +25,10 @@
             <div class="clearfix">
               <div id="thumbcarousel" class="carousel slide" data-interval="false">
                 <div class="carousel-inner">
-                  <% if @product_images.size > 1 %>
+                  <% if @product_images %>
                     <% @product_images.each_with_index do |product_image, idx| %>
                       <div data-target="#carousel" data-slide-to="<%= idx %>" class="thumb" id="show-product-thumb">
-                        <%= link_to(image_tag(product_image.attachment.url(:product)), product_image.attachment.url(:product)) %>
+                        <%= link_to(image_tag(product_image.attachment.url(:product), :alt => "product-thumb-img"), product_image.attachment.url(:product)) %>
                       </div>
                     <% end %>
                   <% else %>
@@ -48,22 +48,20 @@
           </div>
           <div class="media-body">
             <ul class="list-inline">
-              <li><a href="product_grid_left_sidebar.html"><i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る</a></li>
+              <li><a href="<%= main_app.potepan_product_grid_left_sidebar_path %>"><i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る</a></li>
               <!-- <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Share This</a></li> -->
             </ul>
             <h2><%= @product.name %></h2>
             <h3>$<%= @product.price %></h3>
             <p><%= product_description(@product) %></p>
-            <% if @product.has_variants? %>
-              <% @product.variant_option_values_by_option_type.each_value do |values| %>
-                <span class="quick-drop">
-                  <select name="guiest_id3" id="guiest_id3" class="select-drop">
-                    <% values.each_with_index do |value, index| %>
-                      <option value="<%= index %>"><%= value.presentation %></option>
-                    <% end %>
-                  </select>
-                </span>
-              <% end %>
+            <% @product.variant_option_values_by_option_type.each_value do |values| %>
+              <span class="quick-drop">
+                <select name="guiest_id3" id="guiest_id3" class="select-drop">
+                  <% values.each_with_index do |value, index| %>
+                    <option value="<%= index %>"><%= value.presentation %></option>
+                  <% end %>
+                </select>
+              </span>
             <% end %>
             <span class="quick-drop resizeWidth">
               <select name="guiest_id4" id="guiest_id4" class="select-drop">
@@ -73,7 +71,7 @@
               </select>
             </span>
             <div class="btn-area">
-              <a href="cart_page.html" class="btn btn-primary btn-block">カートへ入れる<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+              <a href="<%= main_app.potepan_cart_page_path %>" class="btn btn-primary btn-block">カートへ入れる<i class="fa fa-angle-right" aria-hidden="true"></i></a>
             </div>
             <!-- <div class="tabArea">
               <ul class="nav nav-tabs">

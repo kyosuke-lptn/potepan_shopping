@@ -10,8 +10,6 @@ require 'rspec/rails'
 # solidus
 require 'spree/testing_support/factories'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -70,9 +68,5 @@ RSpec.configure do |config|
   # chromedriver
   config.before(:each, type: :system) do
     driven_by :rack_test
-  end
-
-  config.before(:each, type: :system, js: true) do
-    driven_by :selenium_chrome_headless
   end
 end

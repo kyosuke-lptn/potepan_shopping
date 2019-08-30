@@ -1,5 +1,5 @@
 Spree::ProductsController.class_eval do
-  before_action :product_images, only: :show
+  append_before_action :product_images, only: :show
 
   private
 

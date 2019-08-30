@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     get :privacy_policy,            to: 'sample#privacy_policy'
   end
 
-  scope '/potepan' do
+  scope :potepan do
     resources :products, only: :show, controller: 'spree/products'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
