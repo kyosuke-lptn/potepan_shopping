@@ -40,7 +40,11 @@
           </div>
           <div class="media-body">
             <ul class="list-inline">
-              <li><a href="<%= main_app.potepan_product_grid_left_sidebar_path %>"><i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る</a></li>
+              <li>
+                <%= link_to main_app.potepan_product_grid_left_sidebar_path do %>
+                  <i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る
+                <% end %>
+              </li>
               <!-- <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Share This</a></li> -->
             </ul>
             <h2><%= @product.name %></h2>
@@ -63,7 +67,10 @@
               </select>
             </span>
             <div class="btn-area">
-              <a href="<%= main_app.potepan_cart_page_path %>" class="btn btn-primary btn-block">カートへ入れる<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+              <%= link_to main_app.potepan_cart_page_path, class: "btn btn-primary btn-block" do %>
+                カートへ入れる
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              <% end %>
             </div>
             <!-- <div class="tabArea">
               <ul class="nav nav-tabs">

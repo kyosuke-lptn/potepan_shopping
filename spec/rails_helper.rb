@@ -65,7 +65,7 @@ RSpec.configure do |config|
   # FactoryBot
   config.include FactoryBot::Syntax::Methods
   #
-  # chromedriver
+  # driver
   config.before(:each, type: :system) do
     driven_by :rack_test
   end

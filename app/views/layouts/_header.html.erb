@@ -28,7 +28,9 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="<%= main_app.potepan_cart_page_path %>" class="dropdown-toggle" data-toggle="dropdown disabled"><i class="fa fa-shopping-cart"></i></a>
+              <%= link_to main_app.potepan_cart_page_path, class: "dropdown-toggle", data: { toggle: "dropdown disabled" } do %>
+                <i class="fa fa-shopping-cart"></i>
+              <% end %>
             </li>
           </ul>
         </div>
@@ -47,13 +49,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<%= main_app.potepan_path %>"><%= image_tag("img/logo.png", :alt => "") %></a>
+        <%= link_to(image_tag("img/logo.png", alt: ""), main_app.potepan_path, class: "navbar-brand") %>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="<%= main_app.potepan_path %>">Home</a></li>
+          <li>
+            <%= link_to "Home", main_app.potepan_path %>
+          </li>
           <li class="dropdown megaDropMenu active">
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Shop</a>
           </li>
@@ -75,7 +79,7 @@
       <div class="col-xs-6">
         <ol class="breadcrumb pull-right">
           <li>
-            <a href="<%= main_app.potepan_path %>">Home</a>
+            <%= link_to "Home", main_app.potepan_path %>
           </li>
           <li class="active"><%= header_title %></li>
         </ol>
