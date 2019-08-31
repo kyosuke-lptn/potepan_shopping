@@ -15,10 +15,6 @@
                       <%= image_tag product_image.attachment(:large), itemprop: 'image' %>
                     </div>
                   <% end %>
-                <% else %>
-                  <div class="item active" data-thumb="0">
-                    <%= image_tag @product.display_image.attachment(:large), itemprop: 'image' %>
-                  </div>
                 <% end %>
               </div>
             </div>
@@ -31,10 +27,6 @@
                         <%= link_to(image_tag(product_image.attachment.url(:product), :alt => "product-thumb-img"), product_image.attachment.url(:product)) %>
                       </div>
                     <% end %>
-                  <% else %>
-                    <div data-target="#carousel" data-slide-to="0" class="thumb" id="show-product-thumb">
-                      <%= image_tag @product.display_image.attachment.url(:product), :alt => "product-thumb-img" %>
-                    </div>
                   <% end %>
                 </div>
                 <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">

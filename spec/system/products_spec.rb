@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 describe 'Products機能', type: :system do
-  let!(:product) { create(:product) }
+  let!(:image) { create(:image) }
+  let!(:varient) { create(:master_variant, images: [image]) }
+  let(:product) { varient.product }
 
   describe '詳細表示機能' do
     before do
-      image = File.open(File.expand_path('../fixtures/thinking-cat.jpg', __dir__))
-      product.images.create!(attachment: image)
-
       visit product_path(product)
     end
 

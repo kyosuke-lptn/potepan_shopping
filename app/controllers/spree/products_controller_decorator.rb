@@ -4,6 +4,6 @@ Spree::ProductsController.class_eval do
   private
 
   def product_images
-    @product_images = (@product.images + @product.variant_images).uniq
+    @product_images = (@product.images + @product.variant_images).uniq || [@product.display_image]
   end
 end
