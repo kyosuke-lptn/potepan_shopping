@@ -1,4 +1,4 @@
-Spree::ProductsController.class_eval do
+class Potepan::ProductsController < Spree::ProductsController
   append_before_action :product_images, only: :show
 
   private

@@ -7,7 +7,7 @@ describe 'Products機能', type: :system do
 
   describe '詳細表示機能' do
     before do
-      visit product_path(product)
+      visit potepan_product_path(product)
     end
 
     context '商品詳細情報の表示' do
