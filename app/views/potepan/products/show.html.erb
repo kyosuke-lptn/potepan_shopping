@@ -48,7 +48,7 @@
               <!-- <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i>Share This</a></li> -->
             </ul>
             <h2><%= @product.name %></h2>
-            <h3>$<%= @product.price %></h3>
+            <h3><%= @product.display_price %></h3>
             <p><%= product_description(@product) %></p>
             <% @product.variant_option_values_by_option_type.each_value do |values| %>
               <span class="quick-drop">
@@ -60,11 +60,7 @@
               </span>
             <% end %>
             <span class="quick-drop resizeWidth">
-              <select name="guiest_id4" id="guiest_id4" class="select-drop">
-                <% (1..5).each do |number| %>
-                  <option value="<%= number %>"><%= number %></option>
-                <% end %>
-              </select>
+              <%= select_tag 'guiest_id4', options_for_select({1 => 1, 2 => 2, 3 => 3}, 1), id: "guiest_id4", class: "select-drop" %>
             </span>
             <div class="btn-area">
               <%= link_to main_app.potepan_cart_page_path, class: "btn btn-primary btn-block" do %>
