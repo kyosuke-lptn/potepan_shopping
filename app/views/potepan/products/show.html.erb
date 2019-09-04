@@ -60,7 +60,7 @@
               </span>
             <% end %>
             <span class="quick-drop resizeWidth">
-              <%= select_tag 'guiest_id4', options_for_select({1 => 1, 2 => 2, 3 => 3}, 1), id: "guiest_id4", class: "select-drop" %>
+              <%= select_tag 'guiest_id4', options_for_select([1, 2, 3], 1), id: "guiest_id4", class: "select-drop" %>
             </span>
             <div class="btn-area">
               <%= link_to main_app.potepan_cart_page_path, class: "btn btn-primary btn-block" do %>
