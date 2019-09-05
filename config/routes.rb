@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     get :privacy_policy,            to: 'sample#privacy_policy'
 
     resources :products, only: :show
+    get '/*id', to: 'taxons#show', as: :taxons
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
