@@ -9,24 +9,20 @@
           <div class="media-left productSlider">
             <div id="carousel" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
-                <% if @product_images %>
-                  <% @product_images.each_with_index do |product_image, idx| %>
-                    <div class="item <%= 'active' if idx.zero? %>" data-thumb="<%= idx %>">
-                      <%= image_tag product_image.attachment(:large), itemprop: 'image' %>
-                    </div>
-                  <% end %>
+                <% @product_images.each_with_index do |product_image, idx| %>
+                  <div class="item <%= 'active' if idx.zero? %>" data-thumb="<%= idx %>">
+                    <%= image_tag product_image.attachment(:large), itemprop: 'image' %>
+                  </div>
                 <% end %>
               </div>
             </div>
             <div class="clearfix">
               <div id="thumbcarousel" class="carousel slide" data-interval="false">
                 <div class="carousel-inner">
-                  <% if @product_images %>
-                    <% @product_images.each_with_index do |product_image, idx| %>
-                      <div data-target="#carousel" data-slide-to="<%= idx %>" class="thumb" id="show-product-thumb">
-                        <%= link_to(image_tag(product_image.attachment.url(:product), :alt => "product-thumb-img"), product_image.attachment.url(:product)) %>
-                      </div>
-                    <% end %>
+                  <% @product_images.each_with_index do |product_image, idx| %>
+                    <div data-target="#carousel" data-slide-to="<%= idx %>" class="thumb" id="show-product-thumb">
+                      <%= link_to(image_tag(product_image.attachment.url(:product), :alt => "product-thumb-img"), product_image.attachment.url(:product)) %>
+                    </div>
                   <% end %>
                 </div>
                 <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
@@ -41,7 +37,7 @@
           <div class="media-body">
             <ul class="list-inline">
               <li>
-                <%= link_to main_app.potepan_product_grid_left_sidebar_path do %>
+                <%= link_to potepan_product_grid_left_sidebar_path do %>
                   <i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る
                 <% end %>
               </li>
@@ -63,7 +59,7 @@
               <%= select_tag 'guiest_id4', options_for_select([1, 2, 3], 1), id: "guiest_id4", class: "select-drop" %>
             </span>
             <div class="btn-area">
-              <%= link_to main_app.potepan_cart_page_path, class: "btn btn-primary btn-block" do %>
+              <%= link_to potepan_cart_page_path, class: "btn btn-primary btn-block" do %>
                 カートへ入れる
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
               <% end %>

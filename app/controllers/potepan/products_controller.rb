@@ -4,6 +4,6 @@ class Potepan::ProductsController < Spree::ProductsController
   private
 
   def product_images
-    @product_images = (@product.images + @product.variant_images).uniq
+    @product_images = (@product.images + @product.variant_images).uniq || []
   end
 end
