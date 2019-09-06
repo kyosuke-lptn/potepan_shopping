@@ -1,6 +1,5 @@
 <%= provide(:title, @taxon.seo_title) %>
 <%= provide(:header_title, @taxon.name) %>
-
 <!-- MAIN CONTENT SECTION -->
 <section class="mainContent clearfix productsContent">
   <div class="container">
@@ -10,32 +9,7 @@
           <div class="panel-heading">商品カテゴリー</div>
           <div class="panel-body">
             <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
-              <ul class="nav navbar-nav side-nav">
-                <% @taxon_root.each do |taxon| %>
-                  <% unless taxon.children.empty? %>
-                    <li>
-                      <%= link_to "javascript:;", data: { toggle: "collapse", target: "##{taxon.name}" } do %>
-                        <%= taxon.name %><i class="fa fa-plus"></i>
-                      <% end %>
-                      <ul id="<%= taxon.name %>" class="collapse collapseItem">
-                        <% taxon.children.each do |child| %>
-                          <li>
-                            <%= link_to potepan_taxons_path(child) do %>
-                              <i class="fa fa-caret-right" aria-hidden="true"></i><%= child.name %>  <span>(<%= child.active_products.count %>)</span>
-                            <% end %>
-                          </li>
-                        <% end %>
-                      </ul>
-                    </li>
-                  <% else %>
-                    <li>
-                      <%= link_to potepan_taxons_path(taxon) do %>
-                        <%= taxon.name %>  <span>(<%= taxon.active_products.count %>)</span>
-                      <% end %>
-                    </li>
-                  <% end %>
-                <% end %>
-              </ul>
+              <%= taxons_list(@taxon_root) %>
             </div>
           </div>
         </div>
