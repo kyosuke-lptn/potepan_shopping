@@ -19,4 +19,5 @@
  *= require css/style
  *= require css/colors/default
  *= require_self
+ *= require font-awesome
  */

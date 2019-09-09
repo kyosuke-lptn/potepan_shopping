@@ -2877,6 +2877,9 @@ body.bodyColor.container {
 .singleProduct .media .productSlider #thumbcarousel .thumb:last-child {
   margin-right: 0;
 }
+.singleProduct .media .productSlider #thumbcarousel .thumb:nth-child(4n) {
+  margin-right: 0;
+}
 .singleProduct .media .productSlider #thumbcarousel .thumb:hover {
   opacity: .8;
 }
