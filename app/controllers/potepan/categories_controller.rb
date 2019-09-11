@@ -1,4 +1,4 @@
-class Potepan::TaxonsController < Spree::StoreController
+class Potepan::CategoriesController < Spree::StoreController
   def show
     @taxon = Spree::Taxon.find_by!(id: params[:id])
     searcher = build_searcher(params.merge(taxon: @taxon.id, include_images: true))

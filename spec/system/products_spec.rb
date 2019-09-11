@@ -12,7 +12,7 @@ describe 'Products機能', type: :system do
   end
 
   it "商品に関するページの確認" do
-    visit potepan_taxon_path(taxon.id)
+    visit potepan_category_path(taxon.id)
 
     aggregate_failures do
       expect(page).to have_title "#{taxon.name} - BIGBAG Store"

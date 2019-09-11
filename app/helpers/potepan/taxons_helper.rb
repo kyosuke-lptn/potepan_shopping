@@ -25,7 +25,7 @@ module Potepan
         taxon.children.each do |child|
           concat(
             tag.li do
-              link_to potepan_taxon_path(child.id) do
+              link_to potepan_category_path(child.id) do
                 concat tag.i(class: "fa fa-caret-right", aria: { hidden: true })
                 concat child.name
                 concat tag.span "(#{child.all_products.count})"

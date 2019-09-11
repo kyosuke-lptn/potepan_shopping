@@ -9,6 +9,7 @@ RSpec.describe "Potepan::Products", type: :request do
         get potepan_product_path(product)
         expect(response).to be_successful
       end
+
       it "product-nameが表示される" do
         get potepan_product_path(product)
         expect(response.body).to include product.name
@@ -16,7 +17,7 @@ RSpec.describe "Potepan::Products", type: :request do
     end
 
     context "productが存在しない時" do
-      it "raise an error" do
+      it "raise an error(ActiveRecord::RecordNotFound)" do
         expect do
           get potepan_product_path 1
         end.to raise_error(ActiveRecord::RecordNotFound)
