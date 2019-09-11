@@ -4,39 +4,7 @@
 <section class="mainContent clearfix productsContent">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
-        <div class="panel panel-default">
-          <div class="panel-heading">商品カテゴリー</div>
-          <div class="panel-body">
-            <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
-              <%= taxons_list(@taxonomies) %>
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default filterNormal">
-          <div class="panel-heading">色から探す</div>
-          <div class="panel-body">
-            <ul class="list-unstyled">
-              <li><a href="#">ブラック<span>(15)</span></a></li>
-              <li><a href="#">ホワイト<span>(10)</span></a></li>
-              <li><a href="#">レッド<span>(7)</span></a></li>
-              <li><a href="#">ブルー<span>(12)</span></a></li>
-              <li><a href="#">オレンジ<span>(12)</span></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="panel panel-default filterNormal">
-          <div class="panel-heading">サイズから探す</div>
-          <div class="panel-body">
-            <ul class="list-unstyled clearfix">
-              <li><a href="#">S<span>(15)</span></a></li>
-              <li><a href="#">M<span>(10)</span></a></li>
-              <li><a href="#">L<span>(7)</span></a></li>
-              <li><a href="#">XL<span>(12)</span></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <%= render 'sidebar', taxonomies: @taxonomies %>
       <div class="col-md-9 col-sm-8 col-xs-12">
         <div class="row filterArea">
           <div class="col-xs-6">
