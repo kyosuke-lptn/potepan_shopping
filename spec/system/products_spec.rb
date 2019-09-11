@@ -12,12 +12,12 @@ describe 'Products機能', type: :system do
   end
 
   it "商品に関するページの確認" do
-    visit potepan_taxons_path(taxon)
+    visit potepan_taxon_path(taxon.id)
 
     aggregate_failures do
       expect(page).to have_title "#{taxon.name} - BIGBAG Store"
       expect(page).to have_content product.name
-      expect(page).to have_content product.price
+      expect(page).to have_content product.display_price
       expect(page).to have_content taxonomy.root.name
       expect(page).to have_link taxon.name
     end
@@ -27,7 +27,7 @@ describe 'Products機能', type: :system do
     aggregate_failures do
       expect(page).to have_title "#{product.name} - BIGBAG Store"
       expect(page).to have_content product.name
-      expect(page).to have_content product.price
+      expect(page).to have_content product.display_price
       expect(page).to have_content product.description
       img = first(".item").find("img")
       expect(img[:itemprop]).to eq "image"
