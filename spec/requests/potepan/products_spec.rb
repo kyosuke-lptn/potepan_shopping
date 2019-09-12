@@ -5,7 +5,7 @@ RSpec.describe "Potepan::Products", type: :request do
     context "productが存在する時" do
       let!(:product) { create(:product) }
 
-      it "responds seuccessfully" do
+      it "responds successfully" do
         get potepan_product_path(product)
         expect(response).to be_successful
       end

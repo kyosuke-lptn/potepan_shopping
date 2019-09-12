@@ -1,5 +1,5 @@
 module Potepan
-  module TaxonsHelper
+  module CategoriesHelper
     def taxons_list(taxonomies)
       tag.ul class: "nav navbar-nav side-nav" do
         taxonomies.each do |taxonomy|
