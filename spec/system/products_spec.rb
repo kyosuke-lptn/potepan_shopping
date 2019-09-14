@@ -4,7 +4,7 @@ describe 'Products機能', type: :system do
   let!(:image) { create(:image) }
   let!(:variant) { create(:master_variant, images: [image]) }
   let(:product) { variant.product }
-  let(:taxonomy) { create(:taxonomy) }
+  let!(:taxonomy) { create(:taxonomy, name: 'Categories') }
   let(:taxon) { create(:taxon, parent_id: taxonomy.root.id, taxonomy: taxonomy) }
 
   before do
@@ -16,13 +16,18 @@ describe 'Products機能', type: :system do
 
     aggregate_failures do
       expect(page).to have_title "#{taxon.name} - BIGBAG Store"
+      within '#categories' do
+        expect(page).to have_content taxon.products.first.name
+        expect(page).to have_content taxon.name
+        expect(page).to have_link taxon.name
+      end
       expect(page).to have_content product.name
       expect(page).to have_content product.display_price
-      expect(page).to have_content taxonomy.root.name
-      expect(page).to have_link taxon.name
     end
 
-    click_link product.name
+    within '#categories' do
+      click_link product.name
+    end
 
     aggregate_failures do
       expect(page).to have_title "#{product.name} - BIGBAG Store"
