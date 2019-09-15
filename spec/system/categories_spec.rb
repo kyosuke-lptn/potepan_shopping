@@ -15,8 +15,7 @@ describe 'Categories機能', type: :system do
     aggregate_failures do
       expect(page).to have_title "#{taxon.name} - BIGBAG Store"
       within '#categories' do
-        expect(page).to have_content taxon.products.first.name
-        expect(page).to have_content taxon.name
+        expect(page).to have_content taxon.root.name
         expect(page).to have_link taxon.name
       end
       expect(page).to have_link product.name
