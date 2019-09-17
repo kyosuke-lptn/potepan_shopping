@@ -102,9 +102,12 @@ jQuery(document).ready(function() {
 
 //============================== SIDE NAV MENU TOGGLE =========================
 jQuery(document).ready(function() {
-	$('.side-nav li a').click(function() {
+	$('#category-parent').click(function() {
 		$(this).find('i').toggleClass('fa fa-minus fa fa-plus');
 	});
+  $('#category-child').click(function() {
+    $(this).find('i').toggleClass('fa fa-caret-down fa fa-caret-right');
+  });
 });
 
 //============================== PRICE SLIDER RANGER =========================
