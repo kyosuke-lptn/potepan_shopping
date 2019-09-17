@@ -1,9 +1,16 @@
 require 'rails_helper'
 
-xdescribe 'Products機能', type: :system do
+describe 'Products機能', type: :system do
   let!(:image) { create(:image) }
   let!(:variant) { create(:master_variant, images: [image]) }
   let(:product) { variant.product }
+  let(:taxon_product) { create(:product) }
+  let(:taxon) { create(:taxonomy, name: 'Categories').root }
+
+  before do
+    product.taxons << taxon
+    taxon_product.taxons << taxon
+  end
 
   it "商品に関するページの確認" do
     visit potepan_product_path(product)
@@ -17,8 +24,8 @@ xdescribe 'Products機能', type: :system do
       expect(img[:itemprop]).to eq "image"
       img = first(".thumb").find("img")
       expect(img[:alt]).to eq 'product-thumb-img'
-      expect(page).to have_content taxon_product.name
-      expect(page).to have_content taxon_product.price
+      expect(page).to have_link taxon_product.name
+      expect(page).to have_content taxon_product.display_price
     end
   end
 end
