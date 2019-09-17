@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Products機能', type: :system do
+xdescribe 'Products機能', type: :system do
   let!(:image) { create(:image) }
   let!(:variant) { create(:master_variant, images: [image]) }
   let(:product) { variant.product }
@@ -17,6 +17,8 @@ describe 'Products機能', type: :system do
       expect(img[:itemprop]).to eq "image"
       img = first(".thumb").find("img")
       expect(img[:alt]).to eq 'product-thumb-img'
+      expect(page).to have_content taxon_product.name
+      expect(page).to have_content taxon_product.price
     end
   end
 end
