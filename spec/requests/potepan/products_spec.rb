@@ -3,16 +3,39 @@ require 'rails_helper'
 RSpec.describe "Potepan::Products", type: :request do
   describe "GET /potepan/products/:id" do
     context "商品が存在する時" do
-      let!(:product) { create(:product) }
+      let(:product) { create(:product) }
+      let(:taxon) { create(:taxon) }
 
-      it "正常に応答する" do
-        get potepan_product_path(product)
-        expect(response).to be_successful
+      context "関連商品が存在する時" do
+        before do
+          product.taxons << taxon
+        end
+
+        it "正常に応答する" do
+          get potepan_product_path(product)
+          expect(response).to be_successful
+        end
+
+        it "商品名が表示される" do
+          get potepan_product_path(product)
+          expect(response.body).to include product.name
+        end
       end
 
-      it "商品名が表示される" do
-        get potepan_product_path(product)
-        expect(response.body).to include product.name
+      context "関連商品が存在しない時" do
+        before do
+          product.taxons = []
+        end
+
+        it "正常に応答する" do
+          get potepan_product_path(product)
+          expect(response).to be_successful
+        end
+
+        it "関連商品は表示されない" do
+          get potepan_product_path(product)
+          expect(response.body).not_to include taxon.name
+        end
       end
     end
 
