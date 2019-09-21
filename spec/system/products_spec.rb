@@ -18,14 +18,14 @@ describe 'Products機能', type: :system do
     aggregate_failures do
       expect(page).to have_title "#{product.name} - BIGBAG Store"
       expect(page).to have_content product.name
-      expect(page).to have_content product.display_price
+      expect(page).to have_content display_price(product)
       expect(page).to have_content product.description
       img = first(".item").find("img")
       expect(img[:itemprop]).to eq "image"
       img = first(".thumb").find("img")
       expect(img[:alt]).to eq 'product-thumb-img'
       expect(page).to have_link taxon_product.name
-      expect(page).to have_content taxon_product.display_price
+      expect(page).to have_content display_price(taxon_product)
     end
   end
 end

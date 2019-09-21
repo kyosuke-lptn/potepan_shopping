@@ -1,9 +1,6 @@
-class Potepan::ProductsController < Spree::ProductsController
-  append_before_action :load_variables, only: :show
-
-  private
-
-  def load_variables
+class Potepan::ProductsController < ApplicationController
+  def show
+    @product = Spree::Product.available.friendly.find(params[:id])
     @product_images = (@product.images + @product.variant_images).uniq || []
     @taxons = @product.taxons
     if @taxons.empty?

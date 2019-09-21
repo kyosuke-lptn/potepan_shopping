@@ -43,7 +43,7 @@
               </li>
             </ul>
             <h2><%= @product.name %></h2>
-            <h3><%= @product.display_price %></h3>
+            <h3><%= display_price(@product) %></h3>
             <p><%= product_description(@product) %></p>
             <% @product.variant_option_values_by_option_type.each_value do |values| %>
               <span class="quick-drop">

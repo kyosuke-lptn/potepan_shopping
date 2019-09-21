@@ -24,7 +24,7 @@ describe 'Categories機能', type: :system do
         expect(page).to have_css '.grandchild'
       end
       expect(page).to have_link product.name
-      expect(page).to have_content product.display_price
+      expect(page).to have_content display_price(product)
     end
   end
 end
