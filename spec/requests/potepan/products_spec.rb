@@ -50,7 +50,7 @@ RSpec.describe "Potepan::Products", type: :request do
     end
 
     context "商品が存在しない時" do
-      it "raise an error(ActiveRecord::RecordNotFound)" do
+      it "エラーが発生する(ActiveRecord::RecordNotFound)" do
         expect do
           get potepan_product_path 1
         end.to raise_error(ActiveRecord::RecordNotFound)
