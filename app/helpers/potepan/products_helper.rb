@@ -16,6 +16,8 @@ module Potepan
       product_or_variant.price_for(Spree::Config.default_pricing_options).to_html
     end
 
+    MAXIMUM_NUMBER_OF_DISPLAYS = 4
+
     def taxon_products(product_taxons, exclude_product_id)
       if product_taxons.empty?
         []
@@ -23,7 +25,7 @@ module Potepan
         product_taxons.sample.products.
           includes(master: [:images, :currently_valid_prices]).
           where.not(id: exclude_product_id).
-          limit(4)
+          limit(MAXIMUM_NUMBER_OF_DISPLAYS)
       end
     end
   end
