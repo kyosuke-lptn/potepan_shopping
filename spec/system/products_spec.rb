@@ -24,8 +24,11 @@ describe 'Products機能', type: :system do
       expect(img[:itemprop]).to eq "image"
       img = first(".thumb").find("img")
       expect(img[:alt]).to eq 'product-thumb-img'
-      expect(page).to have_link taxon_product.name
-      expect(page).to have_content display_price(taxon_product)
+      within '#taxon-product' do
+        expect(page).to have_link taxon_product.name
+        expect(page).to have_content display_price(taxon_product)
+        expect(page).not_to have_content product.name
+      end
     end
   end
 end

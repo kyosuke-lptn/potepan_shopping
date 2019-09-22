@@ -20,6 +20,11 @@ RSpec.describe "Potepan::Products", type: :request do
           get potepan_product_path(product)
           expect(response.body).to include product.name
         end
+
+        it "関連商品へのリンクがある" do
+          get potepan_product_path(product)
+          expect(response.body).to include potepan_category_path(taxon.id)
+        end
       end
 
       context "関連商品が存在しない時" do
@@ -35,6 +40,11 @@ RSpec.describe "Potepan::Products", type: :request do
         it "関連商品は表示されない" do
           get potepan_product_path(product)
           expect(response.body).not_to include taxon.name
+        end
+
+        it "関連商品へのリンクがない" do
+          get potepan_product_path(product)
+          expect(response.body).not_to include potepan_category_path(taxon.id)
         end
       end
     end
