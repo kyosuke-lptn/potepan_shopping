@@ -1,8 +1,9 @@
-class Potepan::CategoriesController < Spree::StoreController
+class Potepan::CategoriesController < ApplicationController
   def show
     @taxon = Spree::Taxon.find(params[:id])
-    searcher = build_searcher(params.merge(taxon: @taxon.id, include_images: true))
-    @products = searcher.retrieve_products
+    @products = Spree::Product.
+      includes(master: [:images, :currently_valid_prices]).
+      where(id: @taxon.all_products.ids)
     @taxonomies = Spree::Taxonomy.includes(root: :children)
   end
 end

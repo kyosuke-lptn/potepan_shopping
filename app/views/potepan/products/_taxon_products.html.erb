@@ -1,0 +1,22 @@
+<div class="row productsContent" id="taxon-product">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h4>関連商品</h4>
+    </div>
+  </div>
+  <% taxon_products(taxons, product.id).each do |product| %>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="productBox">
+        <%= link_to potepan_product_path(product) do %>
+          <div class="productImage clearfix">
+            <%= image_tag(product.display_image.attachment.url(:product), :alt => "products-img") %>
+          </div>
+          <div class="productCaption clearfix">
+            <h5><%= product.name %></h5>
+            <h3><%= display_price(product) %></h3>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -37,13 +37,13 @@
           <div class="media-body">
             <ul class="list-inline">
               <li>
-                <%= link_to potepan_product_grid_left_sidebar_path do %>
+                <%= link_to taxon_link(@taxons) do %>
                   <i class="fa fa-reply" aria-hidden="true"></i>一覧ページへ戻る
                 <% end %>
               </li>
             </ul>
             <h2><%= @product.name %></h2>
-            <h3><%= @product.display_price %></h3>
+            <h3><%= display_price(@product) %></h3>
             <p><%= product_description(@product) %></p>
             <% @product.variant_option_values_by_option_type.each_value do |values| %>
               <span class="quick-drop">
@@ -67,56 +67,6 @@
         </div>
       </div>
     </div>
-    <div class="row productsContent">
-      <div class="col-xs-12">
-        <div class="page-header">
-          <h4>関連商品</h4>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="productBox">
-          <div class="productImage clearfix">
-            <%= image_tag("img/products/products-01.jpg", :alt => "products-img") %>
-          </div>
-          <div class="productCaption clearfix">
-            <h5>Nike Sportswear</h5>
-            <h3>199円</h3>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="productBox">
-          <div class="productImage clearfix">
-            <%= image_tag("img/products/products-02.jpg", :alt => "products-img") %>
-          </div>
-          <div class="productCaption clearfix">
-            <h5>Dip Dyed Sweater</h5>
-            <h3>249円</h3>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="productBox">
-          <div class="productImage clearfix">
-            <%= image_tag("img/products/products-03.jpg", :alt => "products-img") %>
-          </div>
-          <div class="productCaption clearfix">
-            <h5>Scarf Ring Corner</h5>
-            <h3>179円</h3>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="productBox">
-          <div class="productImage clearfix">
-            <%= image_tag("img/products/products-04.jpg", :alt => "products-img") %>
-          </div>
-          <div class="productCaption clearfix">
-            <h5>Sun Buddies</h5>
-            <h3>149円</h3>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'taxon_products', taxons: @taxons, product: @product %>
   </div>
 </section>
