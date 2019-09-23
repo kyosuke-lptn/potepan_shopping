@@ -1,16 +1,11 @@
 require 'rails_helper'
 
 describe 'Products機能', type: :system do
-  let!(:image) { create(:image) }
-  let!(:variant) { create(:master_variant, images: [image]) }
-  let(:product) { variant.product }
-  let(:taxon_product) { create(:product) }
-  let(:taxon) { create(:taxonomy, name: 'Categories').root }
-
-  before do
-    product.taxons << taxon
-    taxon_product.taxons << taxon
-  end
+  let(:image) { create(:image) }
+  let(:variant) { create(:master_variant, images: [image]) }
+  let(:taxon) { create(:taxon) }
+  let!(:product) { create(:product, master: variant, taxons: [taxon]) }
+  let!(:taxon_product) { create(:product, taxons: [taxon]) }
 
   it "商品に関するページの確認" do
     visit potepan_product_path(product)

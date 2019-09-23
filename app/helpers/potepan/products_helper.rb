@@ -22,7 +22,7 @@ module Potepan
       if product_taxons.empty?
         []
       else
-        product_taxons.sample.products.
+        Spree::Product.in_taxons(product_taxons).distinct.
           includes(master: [:images, :currently_valid_prices]).
           where.not(id: exclude_product_id).
           limit(MAXIMUM_NUMBER_OF_DISPLAYS)

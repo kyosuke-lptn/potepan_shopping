@@ -3,14 +3,12 @@ require 'rails_helper'
 RSpec.describe "Potepan::Products", type: :request do
   describe "GET /potepan/products/:id" do
     context "商品が存在する時" do
-      let(:product) { create(:product) }
       let(:taxon) { create(:taxon) }
+      let!(:product) { create(:product, taxons: [taxon]) }
+      let!(:product_with_taxon) { create(:product, taxons: [taxon]) }
+      let!(:product_without_taxon) { create(:product) }
 
       context "関連商品が存在する時" do
-        before do
-          product.taxons << taxon
-        end
-
         it "正常に応答する" do
           get potepan_product_path(product)
           expect(response).to be_successful
@@ -21,29 +19,33 @@ RSpec.describe "Potepan::Products", type: :request do
           expect(response.body).to include product.name
         end
 
-        it "関連商品へのリンクがある" do
+        it "関連した商品のみ表示される" do
+          get potepan_product_path(product)
+          aggregate_failures do
+            expect(response.body).to include product_with_taxon.name
+            expect(response.body).not_to include product_without_taxon.name
+          end
+        end
+
+        it "「一覧ページへ戻る」へのリンクがある" do
           get potepan_product_path(product)
           expect(response.body).to include potepan_category_path(taxon.id)
         end
       end
 
       context "関連商品が存在しない時" do
-        before do
-          product.taxons = []
-        end
-
         it "正常に応答する" do
-          get potepan_product_path(product)
+          get potepan_product_path(product_without_taxon)
           expect(response).to be_successful
         end
 
         it "関連商品は表示されない" do
-          get potepan_product_path(product)
-          expect(response.body).not_to include taxon.name
+          get potepan_product_path(product_without_taxon)
+          expect(response.body).not_to include product_with_taxon.name
         end
 
-        it "関連商品へのリンクがない" do
-          get potepan_product_path(product)
+        it "「一覧ページへ戻る」へのリンクがない" do
+          get potepan_product_path(product_without_taxon)
           expect(response.body).not_to include potepan_category_path(taxon.id)
         end
       end
