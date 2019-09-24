@@ -47,13 +47,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to(image_tag("img/logo.png", alt: ""), potepan_path, class: "navbar-brand") %>
+        <%= link_to(image_tag("img/logo.png", alt: ""), potepan_root_path, class: "navbar-brand") %>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <%= link_to "Home", potepan_path %>
+            <%= link_to "Home", potepan_root_path %>
           </li>
           <li class="dropdown megaDropMenu active">
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="300" data-close-others="true" aria-expanded="false">Shop</a>
@@ -75,7 +75,7 @@
       <div class="col-xs-6">
         <ol class="breadcrumb pull-right">
           <li>
-            <%= link_to "Home", potepan_path %>
+            <%= link_to "Home", potepan_root_path %>
           </li>
           <li class="active"><%= header_title %></li>
         </ol>

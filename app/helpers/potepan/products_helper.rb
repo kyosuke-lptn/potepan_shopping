@@ -4,9 +4,9 @@ module Potepan
   module ProductsHelper
     include Spree::ProductsHelper
 
-    def taxon_link(product_taxons)
+    def taxon_or_home_link(product_taxons)
       if product_taxons.empty?
-        potepan_path
+        potepan_root_path
       else
         potepan_category_path(product_taxons.ids[0])
       end
