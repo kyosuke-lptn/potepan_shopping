@@ -70,5 +70,11 @@ RSpec.configure do |config|
     driven_by :rack_test
   end
 
+  # ProductHelper
   config.include Potepan::ProductsHelper
+
+  # remove uploaded file
+  config.after(:suite) do
+    FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_uploads/"])
+  end
 end
