@@ -19,6 +19,7 @@ jQuery(document).ready(function($) {
 	        }
 	    });
 
+    $("ol.breadcrumb.pull-right li").last().addClass("active");
 });
 
 //============================== ALL DROPDOWN ON HOVER =========================

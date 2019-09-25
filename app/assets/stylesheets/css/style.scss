@@ -2230,6 +2230,9 @@ body.bodyColor.container {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+.pageHeader ol.breadcrumb.header-title li:last-child a {
+  color: #252525;
+}
 .pageHeader ol.breadcrumb li a:hover {
   opacity: .9;
 }

@@ -1,5 +1,5 @@
 <%= provide(:title, @taxon.seo_title) %>
-<%= provide(:header_title, @taxon.name) %>
+<%= provide(:header_title, link_to(@taxon.name, potepan_category_path(@taxon.id))) %>
 <!-- MAIN CONTENT SECTION -->
 <section class="mainContent clearfix productsContent">
   <div class="container">

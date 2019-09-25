@@ -38,11 +38,11 @@
         </div>
       </div>
       <div class="col-xs-6">
-        <ol class="breadcrumb pull-right">
+        <ol class="breadcrumb pull-right header-title">
           <li>
             <%= link_to "Home", potepan_root_path %>
           </li>
-          <li class="active"><%= header_title %></li>
+          <%= tag.li(header_title) if header_title.present? %>
         </ol>
       </div>
     </div>
