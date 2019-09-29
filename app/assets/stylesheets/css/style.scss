@@ -2172,10 +2172,15 @@ body.bodyColor.container {
 }
 @media (min-width: 768px) {
   .pageHeader .page-title h2 {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 @media (min-width: 992px) {
+  .pageHeader .page-title h2 {
+    font-size: 29px;
+  }
+}
+@media (min-width: 1200px) {
   .pageHeader .page-title h2 {
     font-size: 30px;
   }

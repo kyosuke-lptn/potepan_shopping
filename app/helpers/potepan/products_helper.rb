@@ -23,7 +23,7 @@ module Potepan
         []
       else
         Spree::Product.in_taxons(product_taxons).distinct.
-          includes(master: [:images, :currently_valid_prices]).
+          with_images_and_prices.
           where.not(id: exclude_product_id).
           limit(MAXIMUM_NUMBER_OF_DISPLAYS)
       end
