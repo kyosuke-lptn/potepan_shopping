@@ -54,9 +54,5 @@ module Potepan
         end
       )
     end
-
-    def colors
-      Spree::OptionType.includes(:option_values).where(presentation: "Color").map{|type|type.option_values.pluck(:name)}.flatten.uniq
-    end
   end
 end
