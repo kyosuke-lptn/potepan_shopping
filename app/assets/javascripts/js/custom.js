@@ -31,6 +31,10 @@ jQuery(document).ready(function(){
         $(this).removeClass('open');
     });
 });
+//============================== ORDER-CATEGORY-PAGE =========================
+$(function() {
+
+});
 //============================== RS-SLIDER =========================
 jQuery(document).ready(function() {
 	  jQuery('.fullscreenbanner').revolution({
@@ -98,7 +102,74 @@ jQuery(document).ready(function() {
 });
 //============================== SELECT BOX =========================
 jQuery(document).ready(function() {
-	$('.select-drop').selectbox();
+  var allProductDisplay = $(".col-sm-4.col-xs-12.product-display");
+  var products = [];
+  allProductDisplay.clone(true).each(function(index){
+    var div = $("<div>").addClass('col-sm-4 col-xs-12 product-display');
+    var divProduct = div.append($(this).html());
+    var priceNumber = $(this).find("h3").text().match(/[0-9]+/g).join("");
+    var product = {
+      html: divProduct,
+      price: priceNumber,
+      }
+    products[index] = product;
+  });
+
+  var latest = products
+  var oldest = products.slice().reverse();
+  var priceHigh = products.slice().sort(function(a, b) {
+    if (a.price < b.price) {
+        return 1;
+      } else {
+        return -1;
+    }
+  })
+  var priceLow = priceHigh.slice().reverse();
+
+  var detachHtml = function() {
+    var d = $.Deferred();
+    allProductDisplay.fadeOut(600);
+    d.resolve();
+    return d.promise();
+  };
+
+  var addProduct = function(arry) {
+    arry.forEach(function(value) {
+      var html =$(value.html).hide().fadeIn(2000);
+      $("#row-product-display").append(html);
+    });
+  }
+
+	$('.select-drop').on("change", function() {
+    detachHtml()
+    .then(function() {
+      switch ($("select option:selected").val()) {
+        case 'latestVal':
+        addProduct(latest);
+        break;
+        case 'lowVal':
+        addProduct(priceLow);
+        break;
+        case 'highVal':
+        addProduct(priceHigh);
+        break;
+        case 'oldVal':
+        addProduct(oldest);
+        break;
+      };
+    });
+  });
+
+  var defualt = function() {
+    var d = $.Deferred();
+    allProductDisplay.detach();
+    d.resolve();
+    return d.promise();
+  }
+  defualt()
+  .then(function() {
+    addProduct(latest);
+  });
 });
 
 //============================== SIDE NAV MENU TOGGLE =========================

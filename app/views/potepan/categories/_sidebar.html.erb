@@ -15,7 +15,7 @@
           <li>
             <%= link_to potepan_category_path(color: color) do %>
               <%= color %>
-              <%=  tag.span "(#{@scope.filter_by_option_value(color).length})" %>
+              <%=  tag.span "(#{Spree::Product.filter_by_option_value(color).length})" %>
             <% end %>
           </li>
         <% end %>
