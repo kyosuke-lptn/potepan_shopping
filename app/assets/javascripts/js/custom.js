@@ -140,10 +140,10 @@ jQuery(document).ready(function() {
     });
   }
 
-	$('.select-drop').on("change", function() {
+	$('.select-drop#guiest_id1').on("change", function() {
     detachHtml()
     .then(function() {
-      switch ($("select option:selected").val()) {
+      switch ($("select#guiest_id1 option:selected").val()) {
         case 'latestVal':
         addProduct(latest);
         break;
@@ -172,12 +172,16 @@ jQuery(document).ready(function() {
   });
 });
 
+jQuery(document).ready(function() {
+  $('.select-drop-1').selectbox();
+});
+
 //============================== SIDE NAV MENU TOGGLE =========================
 jQuery(document).ready(function() {
-	$('#category-parent').click(function() {
+	$('.category-parent').click(function() {
 		$(this).find('i').toggleClass('fa fa-minus fa fa-plus');
 	});
-  $('#category-child').click(function() {
+  $('.category-child').click(function() {
     $(this).find('i').toggleClass('fa fa-caret-down fa fa-caret-right');
   });
 });

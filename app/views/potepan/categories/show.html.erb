@@ -1,5 +1,5 @@
-<%= provide(:title, @title) %>
-<%= provide(:header_title, @title) %>
+<%= provide(:title, @taxon.name) %>
+<%= provide(:header_title, categories_title(@search_form)) %>
 <!-- MAIN CONTENT SECTION -->
 <section class="mainContent clearfix productsContent">
   <div class="container">
@@ -8,6 +8,7 @@
       <div class="col-md-9 col-sm-8 col-xs-12">
         <div class="row filterArea">
           <div class="col-xs-6">
+            <label for="guiest_id1">並び順</label>
             <select name="guiest_id1" id="guiest_id1" class="select-drop">
               <option value="latestVal">新着順</option>
               <option value="lowVal">安い順</option>
@@ -25,7 +26,7 @@
         <div class="row" id="row-product-display">
           <% @products.each do |product| %>
             <div class="col-sm-4 col-xs-12 product-display">
-              <div class="productBox">
+              <div class="productBox" id="<%= product.id %>">
                 <%= link_to potepan_product_path(product) do %>
                   <div class="productImage clearfix">
                     <%= image_tag product.display_image.attachment.url(:product), alt: 'products-img' %>

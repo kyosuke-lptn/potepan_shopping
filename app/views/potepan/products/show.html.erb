@@ -47,7 +47,7 @@
             <p><%= product_description(@product) %></p>
             <% @product.variant_option_values_by_option_type.each_value do |values| %>
               <span class="quick-drop">
-                <select name="guiest_id3" id="guiest_id3" class="select-drop">
+                <select name="guiest_id3" id="guiest_id3" class="select-drop-1">
                   <% values.each_with_index do |value, number| %>
                     <option value="<%= number %>"><%= value.presentation %></option>
                   <% end %>
@@ -55,7 +55,7 @@
               </span>
             <% end %>
             <span class="quick-drop resizeWidth">
-              <%= select_tag 'guiest_id4', options_for_select([1, 2, 3], 1), id: "guiest_id4", class: "select-drop" %>
+              <%= select_tag 'guiest_id4', options_for_select([1, 2, 3], 1), id: "guiest_id4", class: "select-drop-1" %>
             </span>
             <div class="btn-area">
               <%= link_to potepan_cart_page_path, class: "btn btn-primary btn-block" do %>

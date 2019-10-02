@@ -1,6 +1,9 @@
 module Potepan::ProductDecorator
   def self.prepended(base)
-    base.scope :filter_by_taxon, ->(taxon) { where(id: taxon.all_products.ids) }
+    base.scope :filter_by_taxon, ->(taxon_id) do
+      joins(:taxons).
+        where("#{Spree::Taxon.table_name}.id = ?", taxon_id)
+    end
 
     base.scope :filter_by_option_value, ->(option_value) do
       joins(variants: :option_values).

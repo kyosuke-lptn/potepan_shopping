@@ -15,7 +15,7 @@
           <li>
             <%= link_to potepan_category_path(color: color) do %>
               <%= color %>
-              <%=  tag.span "(#{Spree::Product.filter_by_option_value(color).length})" %>
+              <%=  tag.span "(#{ProductSearchForm.new(taxon: @taxon, color: color).search.unscope(:includes, :order).length})" %>
             <% end %>
           </li>
         <% end %>
