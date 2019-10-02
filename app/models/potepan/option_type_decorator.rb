@@ -4,7 +4,7 @@ module Potepan::OptionTypeDecorator
       includes(:option_values).
         where("#{Spree::OptionType.table_name}.presentation = ?", presentation).
         map do |type|
-          type.option_values.pluck(:name)
+          type.option_values.pluck(:presentation)
         end.flatten.uniq
     end
   end
