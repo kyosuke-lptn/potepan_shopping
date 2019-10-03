@@ -1040,6 +1040,18 @@ body.bodyColor.container {
   color: #ffffff;
 }
 
+.input-group.topbar-search {
+  display: flex;
+}
+
+input#search_word {
+    flex-grow: 1;
+}
+
+input#basic-addon2 {
+    flex-basis: 70px;
+}
+
 /*=== 2.2.2 COPY RIGHT ===*/
 .copyRight {
   display: block;

@@ -4,7 +4,7 @@
 <section class="mainContent clearfix productsContent">
   <div class="container">
     <div class="row">
-      <%= render 'sidebar', taxonomies: @taxonomies %>
+      <%= render 'sidebar', taxonomies: @taxonomies, option_type: @option_type, filter_taxon: @taxon %>
       <div class="col-md-9 col-sm-8 col-xs-12">
         <div class="row filterArea">
           <div class="col-xs-6">
@@ -24,21 +24,7 @@
           </div>
         </div>
         <div class="row" id="row-product-display">
-          <% @products.each do |product| %>
-            <div class="col-sm-4 col-xs-12 product-display">
-              <div class="productBox" id="<%= product.id %>">
-                <%= link_to potepan_product_path(product) do %>
-                  <div class="productImage clearfix">
-                    <%= image_tag product.display_image.attachment.url(:product), alt: 'products-img' %>
-                  </div>
-                  <div class="productCaption clearfix">
-                    <h5><%= product.name %></h5>
-                    <h3><%= display_price(product) %></h3>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
+          <%= render 'products_list', products: @products %>
         </div>
       </div>
     </div>
