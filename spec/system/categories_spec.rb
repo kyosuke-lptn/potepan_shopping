@@ -48,6 +48,9 @@ describe 'Categories機能', type: :system do
 
     it "色指定した場合の表示確認" do
       visit potepan_category_path(taxon_child.id)
+      within find('a', text: 'Red') do
+        expect(page).to have_selector 'span', text: "(1)"
+      end
       click_link "Red"
 
       aggregate_failures do
@@ -60,6 +63,9 @@ describe 'Categories機能', type: :system do
     it "サイズ指定した場合の表示確認" do
       visit potepan_category_path(taxon_child.id)
       within ".list-unstyled.clearfix" do
+        within find('a', text: 'S') do
+          expect(page).to have_selector 'span', text: "(1)"
+        end
         click_link "S"
       end
 

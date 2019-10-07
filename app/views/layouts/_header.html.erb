@@ -28,23 +28,4 @@
     </div>
   </nav>
 </div>
-<!-- LIGHT SECTION -->
-<section class="lightSection clearfix pageHeader">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-6">
-        <div class="page-title">
-          <h2><%= yield(:header_title) %></h2>
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <ol class="breadcrumb pull-right header-title">
-          <li>
-            <%= link_to "Home", potepan_root_path %>
-          </li>
-          <%= tag.li yield(:header_title) %>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
+<%= select_light_section(yield(:header_title)) %>

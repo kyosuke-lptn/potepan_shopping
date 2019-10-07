@@ -2,9 +2,10 @@ module Potepan::ProductDecorator
   MAX_SEARCH_PRODUCT_DISPLAY = 9
 
   def self.prepended(base)
-    base.scope :filter_by_taxon, ->(taxon_id) do
+    base.scope :filter_by_taxon, ->(taxon) do
+      taxon_ids = taxon.self_and_descendants.ids
       joins(:taxons).
-        where("#{Spree::Taxon.table_name}.id = ?", taxon_id)
+        where("#{Spree::Taxon.table_name}.id IN (?)", taxon_ids)
     end
 
     base.scope :filter_by_option_value, ->(option_value) do

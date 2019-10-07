@@ -14,7 +14,7 @@
           <li class="dropdown searchBox">
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <%= form_tag({controller: "search", action: "show"}, method: "get", id: "form01") do %>
+              <%= form_tag('/potepan/search', method: "get", id: "form01") do %>
                 <li>
                   <span class="input-group topbar-search">
                     <%= text_field_tag(:search_word, '', { class: "form-control", placeholder: "Search…", aria: { describedby: "basic-addon2" } })%>
@@ -25,9 +25,30 @@
             </ul>
           </li>
           <li class="dropdown">
-            <%= link_to potepan_cart_page_path, class: "dropdown-toggle", data: { toggle: "dropdown disabled" } do %>
-              <i class="fa fa-shopping-cart"></i>
-            <% end %>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="topbar-shoppting-cart"><i class="fa fa-shopping-cart"></i></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <% if @order %>
+                <li>Item(s) in your cart</li>
+                <% @order.line_items.each do |item| %>
+                  <li>
+                    <%= link_to potepan_product_path(item.product) do %>
+                      <div class="media">
+                        <%= image_tag item.variant.display_image.attachment(:mini), class: "media-left media-object", alt: 'cart-Image' %>
+                        <div class="media-body">
+                          <h5 class="media-heading"><%= item.name %><br><span><%= item.quantity %> X <%= item.display_price %></span></h5>
+                        </div>
+                      </div>
+                    <% end %>
+                  </li>
+                <% end %>
+                <li>
+                  <div class="btn-group" role="group" aria-label="...">
+                    <%= button_tag "Shopping Cart", type: 'button', onclick: "link_to('#{edit_potepan_order_path(@order)}')", class: "btn btn-default" %>
+                    <%= button_tag "Checkout", type: 'button', onclick: "link_to('#')", class: "btn btn-default" %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
           </li>
         </ul>
       </div>

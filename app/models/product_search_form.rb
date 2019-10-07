@@ -8,7 +8,7 @@ class ProductSearchForm
 
   def search
     scope = Spree::Product.all
-    scope = scope.filter_by_taxon(taxon.id)
+    scope = scope.filter_by_taxon(taxon)
     if color.present?
       scope = scope.filter_by_option_value(color)
     elsif size.present?
