@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     resources :categories, only: :show
     resources :orders, only: [:create, :edit, :update]
     get :search, to: 'search#show'
+    get '/checkout/:state', to: 'checkout#edit', as: :checkout_state
+    patch '/checkout/update/:state', to: 'checkout#update', as: :update_checkout
+    get '/cart', to: 'orders#edit'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

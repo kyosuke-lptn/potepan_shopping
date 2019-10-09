@@ -2,7 +2,6 @@ class Potepan::OrdersController < ApplicationController
   before_action :store_guest_token
   before_action :assign_order, only: :update
   before_action :order_params, only: :update
-  skip_before_action :get_current_order
 
   def create
     @order = current_order(create_order_if_necessary: true)
@@ -21,22 +20,25 @@ class Potepan::OrdersController < ApplicationController
       flash[:error] = @order.errors.full_messages.join(", ")
       redirect_back(fallback_location: potepan_root_path) and return # rubocop: disable Style/AndOr
     else
-      redirect_to edit_potepan_order_path(@order)
+      redirect_to potepan_cart_path
     end
   end
 
   def edit
-    @order = current_order
+    @order = current_order || Spree::Order.incomplete.find_or_initialize_by(
+      guest_token: cookies.signed[:guest_token]
+    )
+    associate_user
   end
 
   def update
     if @order.contents.update_cart(order_params)
       @order.next if params.key?(:checkout) && @order.cart? # rubocop: disable Airbnb/SimpleModifierConditional, Metrics/LineLength
       if params.key?(:checkout)
-        # redirect_to checkout_state_path(@order.checkout_steps.first) and return
+        redirect_to potepan_checkout_state_path(@order.checkout_steps.first) and return # rubocop: disable Style/AndOr, Metrics/LineLength
       end
     end
-    redirect_to edit_potepan_order_path(@order)
+    redirect_to potepan_cart_path
   end
 
   private
@@ -55,6 +57,6 @@ class Potepan::OrdersController < ApplicationController
 
   def assign_order
     @order = current_order
-    redirect_to(root_path) and return unless @order # rubocop: disable Style/AndOr
+    redirect_to(potepan_root_path) and return unless @order # rubocop: disable Style/AndOr
   end
 end

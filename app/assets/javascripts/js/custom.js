@@ -22,6 +22,10 @@ jQuery(document).ready(function($) {
     $("ol.breadcrumb.pull-right li").last().addClass("active");
 });
 
+function link_to(link) {
+  location.href = link;
+}
+
 //============================== ALL DROPDOWN ON HOVER =========================
 jQuery(document).ready(function(){
     $('.dropdown').hover(function() {
@@ -31,10 +35,7 @@ jQuery(document).ready(function(){
         $(this).removeClass('open');
     });
 });
-//============================== ORDER-CATEGORY-PAGE =========================
-$(function() {
 
-});
 //============================== RS-SLIDER =========================
 jQuery(document).ready(function() {
 	  jQuery('.fullscreenbanner').revolution({

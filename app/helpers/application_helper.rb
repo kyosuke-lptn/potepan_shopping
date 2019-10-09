@@ -8,11 +8,15 @@ module ApplicationHelper
     end
   end
 
-  def select_light_section(title_name)
-    if title_name == "CART"
-      return render('potepan/orders/light_section') # rubocop: disable Style/RedundantReturn
+  def select_light_section(header_title)
+    if header_title == "CART"
+      return render( # rubocop: disable Style/RedundantReturn
+        'potepan/orders/light_section', header_title: header_title
+      )
     else
-      return render('layouts/light_section') # rubocop: disable Style/RedundantReturn
+      return render( # rubocop: disable Style/RedundantReturn
+        'layouts/light_section', header_title: header_title
+      )
     end
   end
 end

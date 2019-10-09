@@ -5,12 +5,12 @@
       <div class="row tableInner">
         <div class="col-xs-12">
           <div class="page-title">
-            <h2><%= yield(:header_title) %></h2>
+            <h2><%= header_title %></h2>
             <ol class="breadcrumb">
               <li>
                 <%= link_to "Home", potepan_root_path %>
               </li>
-              <%= tag.li yield(:header_title) %>
+              <%= tag.li header_title, class: "active" %>
             </ol>
           </div>
         </div>

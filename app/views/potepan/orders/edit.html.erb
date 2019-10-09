@@ -14,6 +14,7 @@
               <% end %>
             </div>
           <% else %>
+            <%= tag.h5(flash[:error], class: "alert alert-danger") if flash.present? %>
             <%= form_for [:potepan, @order], html: { id: "update-cart" } do |order_form| %>
               <div class="table-responsive">
                 <table class="table">
@@ -63,7 +64,7 @@
                 </div>
               </div>
               <div class="checkBtnArea">
-                <%= button_tag class: "btn btn-primary btn-block", aria: { hidden: true } do %>
+                <%= button_tag name: "checkout", class: "btn btn-primary btn-block", id: "purchase", aria: { hidden: true } do %>
                 購入する<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                 <% end %>
               </div>

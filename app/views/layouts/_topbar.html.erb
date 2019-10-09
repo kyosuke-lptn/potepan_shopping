@@ -27,9 +27,9 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="topbar-shoppting-cart"><i class="fa fa-shopping-cart"></i></a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <% if @order %>
+              <% if current_order %>
                 <li>Item(s) in your cart</li>
-                <% @order.line_items.each do |item| %>
+                <% current_order.line_items.each do |item| %>
                   <li>
                     <%= link_to potepan_product_path(item.product) do %>
                       <div class="media">
@@ -43,8 +43,8 @@
                 <% end %>
                 <li>
                   <div class="btn-group" role="group" aria-label="...">
-                    <%= button_tag "Shopping Cart", type: 'button', onclick: "link_to('#{edit_potepan_order_path(@order)}')", class: "btn btn-default" %>
-                    <%= button_tag "Checkout", type: 'button', onclick: "link_to('#')", class: "btn btn-default" %>
+                    <%= button_tag "Shopping Cart", type: 'button', onclick: "link_to('#{potepan_cart_path}')", class: "btn btn-default" %>
+                    <%= button_tag "Checkout", type: 'button', onclick: "link_to('#{potepan_checkout_state_path(current_order.state)}')", class: "btn btn-default" %>
                   </div>
                 </li>
               <% end %>
