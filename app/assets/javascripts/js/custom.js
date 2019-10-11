@@ -242,6 +242,49 @@ function FormSubmit() {
   target.submit();
 };
 
+jQuery(document).ready(function() {
+	var backorderable_no_stock = $("#backorderable_no_stock").text().split(',');
+	var no_backorderable_stock = $("#no_backorderable_stock").text().split(',');
+	var no_backorderable_no_stock = $("#no_backorderable_no_stock").text().split(',');
+  var defaultQuantity = $("#manyItems").html();
+
+  var resetFomr = function() {
+    $("#manyItems").empty().append(defaultQuantity);
+    $("#quantity-selectbox").show();
+    $("#backorderable").hide();
+    $("#cantAddCart").hide();
+    $("form div.btn-area").show();
+  }
+
+  var linkHtml = function() {
+    var d = $.Deferred();
+    resetFomr();
+    d.resolve();
+    return d.promise();
+  }
+
+  var changFormAction = function() {
+    var selectId = $("#variant_id").val()
+    linkHtml()
+      .then(function () {
+        if (backorderable_no_stock.indexOf(selectId) >= 0) {
+          $("#backorderable").show();
+          } else if (no_backorderable_stock.indexOf(selectId) >= 0) {
+          var showHtml = $(`#quantity-items${selectId}`).html();
+          $("#manyItems").empty().append(showHtml).show();
+        } else if (no_backorderable_no_stock.indexOf(selectId) >= 0) {
+          $("#cantAddCart").show();
+          $("#quantity-selectbox").hide();
+          $("form div.btn-area").hide();
+        }
+      });
+  }
+  $('select#variant_id').on("change", function() {
+    changFormAction();
+  });
+  changFormAction();
+});
+
 //============================== CART PRODUCT =========================
 jQuery(document).ready(function() {
 	$("form .close").click(function() {
@@ -259,6 +302,9 @@ jQuery(document).ready(function() {
   $("form#update-cart").submit(function() {
     $("form#update-cart #update-button").attr("disabled", true);
   });
+});
+jQuery(document).ready(function() {
+  $(".form-group.col-sm-6.col-xs-12 select").attr("class", "form-control");
 });
 //============================== FOOTER COPYRIGHT =========================
 

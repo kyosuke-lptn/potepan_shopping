@@ -84,14 +84,17 @@ RSpec.describe "Potepan::Checkout", type: :request do
     end
 
     context 'orderがユーザーに紐づいていない場合' do
-      let(:user) { create(:user) }
+      let(:user) { create(:user, ship_address: ship_address, bill_address: bill_address) }
       let(:order_nil_user) do
         create(:order_with_line_items,
                user: nil,
+               email: nil,
                bill_address: nil,
                ship_address: nil,
                state: "address")
       end
+      let(:bill_address) { create(:address) }
+      let(:ship_address) { create(:address) }
 
       before do
         current_order_stub(order_nil_user)
@@ -100,7 +103,12 @@ RSpec.describe "Potepan::Checkout", type: :request do
 
       it "orderにユーザー情報が追加される" do
         get potepan_checkout_state_path(order_nil_user.state)
-        expect(order_nil_user.user).to eq(user)
+        aggregate_failures do
+          expect(order_nil_user.user).to eq(user)
+          expect(order_nil_user.email).to eq(user.email)
+          expect(order_nil_user.bill_address).to eq(bill_address)
+          expect(order_nil_user.ship_address).to eq(ship_address)
+        end
       end
     end
   end
