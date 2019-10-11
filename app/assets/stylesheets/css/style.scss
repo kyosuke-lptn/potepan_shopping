@@ -1040,6 +1040,18 @@ body.bodyColor.container {
   color: #ffffff;
 }
 
+.input-group.topbar-search {
+  display: flex;
+}
+
+input#search_word {
+    flex-grow: 1;
+}
+
+input#basic-addon2 {
+    flex-basis: 70px;
+}
+
 /*=== 2.2.2 COPY RIGHT ===*/
 .copyRight {
   display: block;
@@ -1912,6 +1924,9 @@ body.bodyColor.container {
 }
 
 /*=== 3.6 STEPS PAGE FORM ===*/
+div.cartListInner > ul.address-button{
+  border: none;
+}
 .stepsPage form {
   margin: 0 -15px;
 }
@@ -2172,10 +2187,15 @@ body.bodyColor.container {
 }
 @media (min-width: 768px) {
   .pageHeader .page-title h2 {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 @media (min-width: 992px) {
+  .pageHeader .page-title h2 {
+    font-size: 29px;
+  }
+}
+@media (min-width: 1200px) {
   .pageHeader .page-title h2 {
     font-size: 30px;
   }
@@ -2229,6 +2249,9 @@ body.bodyColor.container {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+.pageHeader ol.breadcrumb.header-title li:last-child a {
+  color: #252525;
 }
 .pageHeader ol.breadcrumb li a:hover {
   opacity: .9;
@@ -2983,6 +3006,10 @@ li.grandchild {
 }
 
 /*=== 7.3 CART PRODUCTS ===*/
+a.cart-product-name {
+    color: #252525;
+}
+
 .cartListInner .updateArea .input-group .form-control, .cartListInner .updateArea .input-group .input-group-addon, .cartListInner .updateArea .btn {
   border-radius: 0;
   box-shadow: none;

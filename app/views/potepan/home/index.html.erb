@@ -1,0 +1,104 @@
+<%= provide(:header_title, "Home") %>
+<!-- MAIN CONTENT SECTION -->
+<section class="mainContent clearfix">
+  <div class="container">
+    <div class="row featuredCollection">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h4>人気カテゴリー</h4>
+        </div>
+      </div>
+      <% @hot_taxons.each do |taxon| %>
+        <div class="col-sm-4 col-xs-12">
+          <div class="thumbnail">
+            <%= link_to potepan_category_path(taxon.id) do %>
+              <div class="imageWrapper">
+                <%= image_tag(taxon.icon.url(:large), :alt => "feature-collection-image") %>
+                <div class="masking"><span class="btn viewBtn"><%= "View #{taxon.name}" %></span></div>
+              </div>
+              <div class="caption">
+                <h4><%= taxon.name %></h4>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="row featuredProducts">
+      <div class="col-xs-12">
+        <div class="page-header">
+          <h4>新着商品</h4>
+        </div>
+      </div>
+      <div class="col-xs-12">
+        <div class="owl-carousel featuredProductsSlider">
+          <% @new_products.each do |product| %>
+            <div class="slide">
+              <%= link_to potepan_product_path(product) do %>
+                <div class="productImage clearfix">
+                  <%= image_tag(product.display_image.attachment.url(:product), :alt => "featured-product-img") %>
+                </div>
+                <div class="productCaption clearfix">
+                  <h5><%= product.name %></h5>
+                  <h3><%= display_price(product) %></h3>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHT SECTION -->
+<section class="lightSection clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="owl-carousel partnersLogoSlider">
+          <div class="slide">
+            <div class="partnersLogo clearfix">
+              <%= image_tag("home/partners/partner-01.png", :alt => "partner-img") %>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="partnersLogo clearfix">
+              <%= image_tag("home/partners/partner-02.png", :alt => "partner-img") %>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="partnersLogo clearfix">
+              <%= image_tag("home/partners/partner-03.png", :alt => "partner-img") %>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="partnersLogo clearfix">
+              <%= image_tag("home/partners/partner-04.png", :alt => "partner-img") %>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="partnersLogo clearfix">
+              <%= image_tag("home/partners/partner-05.png", :alt => "partner-img") %>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="partnersLogo clearfix">
+              <%= image_tag("home/partners/partner-01.png", :alt => "partner-img") %>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="partnersLogo clearfix">
+              <%= image_tag("home/partners/partner-02.png", :alt => "partner-img") %>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="partnersLogo clearfix">
+              <%= image_tag("home/partners/partner-03.png", :alt => "partner-img") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

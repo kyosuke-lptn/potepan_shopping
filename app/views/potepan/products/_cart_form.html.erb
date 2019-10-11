@@ -1,0 +1,18 @@
+<%= form_tag('/potepan/orders', method: "post", id: "product-form") do %>
+  <span class="quick-drop variant">
+    <%= select_box_of_variant(product) %>
+  </span>
+  <span class="quick-drop resizeWidth" id="quantity-selectbox">
+    <%= select_tag :quantity, options_for_select([*1..10], 1), id: "manyItems" %>
+  </span>
+
+  <h5 class="text-danger" id="backorderable" hidden>只今、在庫がない状態です。ご注文は可能ですが、入荷次第の配送になります。</h5>
+  <h5 class="text-danger" id="cantAddCart" hidden>大変申し訳ありません。只今、在庫がない状態です。入荷までお待ちください。</h5>
+  <div class="btn-area">
+    <%= button_tag class: "btn btn-primary btn-block", id: "btn-to-add-product" do %>
+      カートへ入れる
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+    <% end %>
+  </div>
+<% end %>
+<%= variants_assign(product) %>

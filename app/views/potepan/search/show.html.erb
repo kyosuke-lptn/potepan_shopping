@@ -1,0 +1,33 @@
+<%= provide(:title, "Search") %>
+<%= provide(:header_title, "Search : '#{@word}'") %>
+<!-- MAIN CONTENT SECTION -->
+<section class="mainContent clearfix productsContent">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
+        <div class="panel panel-default">
+          <div class="panel-heading">商品カテゴリー</div>
+          <div class="panel-body">
+            <div class="collapse navbar-side-collapse">
+              <%= taxons_list(@taxonomies) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-8 col-xs-12">
+        <div class="row filterArea">
+          <div class="col-xs-6">
+            <div class="btn-group pull-right" role="group">
+              <button type="button" class="btn btn-default active" onclick="window.location.href='product_grid_left_sidebar.html'"><i class="fa fa-th" aria-hidden="true"></i><span>Grid</span></button>
+              <button type="button" class="btn btn-default" onclick="window.location.href='product_list_left_sidebar.html'"><i class="fa fa-th-list" aria-hidden="true"></i><span>List</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="row-product-display">
+          <%= tag.h4("'#{@word}' に該当する商品が見つかりませんでした") if @products.blank? %>
+          <%= render 'potepan/categories/products_list', products: @products %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

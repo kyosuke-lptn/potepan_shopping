@@ -1,0 +1,20 @@
+<!-- LIGHT SECTION -->
+<section class="lightSection clearfix pageHeader">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="page-title">
+          <%= tag.h2 header_title %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <ol class="breadcrumb pull-right header-title">
+          <li>
+            <%= link_to "Home", potepan_root_path %>
+          </li>
+          <%= tag.li(header_title, class: "active") unless header_title == "Home" %>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

@@ -30,7 +30,7 @@ module Potepan
         link_to potepan_category_path(taxon.id) do
           concat tag.i(class: "fa fa-angle-right", aria: { hidden: true })
           concat taxon.name
-          concat tag.span "(#{taxon.active_products.count})"
+          concat tag.span "  (#{taxon.active_products.count})"
         end
       end
     end
@@ -40,7 +40,7 @@ module Potepan
       concat(
         tag.li do
           concat(
-            link_to("javascript:;", id: a_id, data: {
+            link_to("javascript:;", class: a_id, data: {
               toggle: "collapse",
               target: "\##{taxon.name}",
             }) do
@@ -53,6 +53,14 @@ module Potepan
           )
         end
       )
+    end
+
+    def categories_title(search_form)
+      title = search_form.taxon.name
+      if search_form.color
+        title += " / #{search_form.color}"
+      end
+      title
     end
   end
 end

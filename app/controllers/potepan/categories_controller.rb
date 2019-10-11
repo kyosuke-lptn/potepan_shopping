@@ -1,9 +1,9 @@
 class Potepan::CategoriesController < ApplicationController
   def show
     @taxon = Spree::Taxon.find(params[:id])
-    @products = Spree::Product.
-      includes(master: [:images, :currently_valid_prices]).
-      where(id: @taxon.all_products.ids)
+    @search_form = ProductSearchForm.new(taxon: @taxon, color: params[:color], size: params[:size])
+    @products = @search_form.search
     @taxonomies = Spree::Taxonomy.includes(root: :children)
+    @option_type = Spree::OptionType.all
   end
 end

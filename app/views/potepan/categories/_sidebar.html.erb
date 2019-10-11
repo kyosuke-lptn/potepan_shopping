@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">商品カテゴリー</div>
     <div class="panel-body">
-      <div class="collapse navbar-collapse navbar-ex1-collapse navbar-side-collapse">
+      <div class="collapse navbar-side-collapse">
         <%= taxons_list(taxonomies) %>
       </div>
     </div>
@@ -11,11 +11,14 @@
     <div class="panel-heading">色から探す</div>
     <div class="panel-body">
       <ul class="list-unstyled">
-        <li><a href="#">ブラック<span>(15)</span></a></li>
-        <li><a href="#">ホワイト<span>(10)</span></a></li>
-        <li><a href="#">レッド<span>(7)</span></a></li>
-        <li><a href="#">ブルー<span>(12)</span></a></li>
-        <li><a href="#">オレンジ<span>(12)</span></a></li>
+        <% option_type.value_name("Color").each do |color| %>
+          <li>
+            <%= link_to potepan_category_path(color: color) do %>
+              <%= color %>
+              <%= tag.span "(#{ProductSearchForm.new(taxon: filter_taxon, color: color).search.unscope(:includes, :order).size.length})" %>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
@@ -23,10 +26,14 @@
     <div class="panel-heading">サイズから探す</div>
     <div class="panel-body">
       <ul class="list-unstyled clearfix">
-        <li><a href="#">S<span>(15)</span></a></li>
-        <li><a href="#">M<span>(10)</span></a></li>
-        <li><a href="#">L<span>(7)</span></a></li>
-        <li><a href="#">XL<span>(12)</span></a></li>
+        <% option_type.value_name("Size").each do |size| %>
+          <li>
+            <%= link_to potepan_category_path(size: size) do %>
+              <%= size %>
+              <%= tag.span "(#{ProductSearchForm.new(taxon: filter_taxon, size: size).search.unscope(:includes, :order).size.length})" %>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

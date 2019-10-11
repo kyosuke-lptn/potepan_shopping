@@ -16,3 +16,5 @@ AllCops:
     - 'vendor/**/*'
     - 'path/ruby'
     - 'spec/spec_helper.rb'
+    - 'app/models/potepan/product_decorator.rb'
+    - 'app/models/potepan/option_type_decorator.rb'
