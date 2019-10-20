@@ -1,0 +1,56 @@
+<h2><%= "#{@order.billing_lastname} #{@order.billing_firstname}様" %></h2>
+<p><%= @store.name %>をご利用いただき誠にありがとうございます。</p>
+<p>ご購入いただきました商品についてメールにて通知させていただきます。</p>
+
+<h4>ご注文内容<small><%= "(#{@order.line_items.count}点)" %></small></h4>
+<p>ご注文番号：<%= @order.number %></p>
+
+<div>
+  <div>
+    <h4>お届け先情報</h4>
+  </div>
+  <div>
+    <address>
+      <strong><%= @order.name %></strong><br>
+      <%= @order.ship_address.zipcode %><br>
+      <%= "#{@order.ship_address.country.try(:name)}  #{@order.ship_address.state.name}" %><br>
+      <%= "#{@order.ship_address.city}  #{@order.ship_address.address1}" %>
+    </address>
+  </div>
+</div>
+<h4>商品詳細</h4>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>商品名</th>
+      <th>価格（税抜）</th>
+      <th>数</th>
+      <th>小計（税抜）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.line_items.each do |item| %>
+      <tr>
+        <td>
+          <span><%= image_tag item.variant.display_image.attachment(:mini), alt: 'image' %></span>
+        </td>
+        <td><%= link_to line_item_name(item), potepan_product_path(item.product), class: "cart-product-name" %></td>
+        <td><%= "¥#{(item.total_excluding_vat / item.quantity).round}" %></td>
+        <td><%= item.quantity %></td>
+        <td><%= item.display_total_excluding_vat %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<ul>
+  <li>小計 <span><%= "¥#{@order.item_total_excluding_vat.round}" %></span></li>
+  <li>消費税 <span><%= @order.display_included_tax_total %></span></li>
+  <li>配送料 <span><%= @order.display_ship_total %></span></li>
+  <li>総計 <span><%= @order.display_total %></span></li>
+</ul>
+
+
+
+<p>またのご利用をお待ちしております。</p>
+<%= @store.name %>

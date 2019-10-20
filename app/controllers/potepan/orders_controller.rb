@@ -1,7 +1,8 @@
 class Potepan::OrdersController < ApplicationController
   before_action :store_guest_token
   before_action :assign_order, only: :update
-  before_action :order_params, only: :update
+  before_action :ensure_completed_order, only: :show
+  around_action :lock_order, only: :update
 
   def create
     @order = current_order(create_order_if_necessary: true)
@@ -42,6 +43,11 @@ class Potepan::OrdersController < ApplicationController
   end
 
   private
+
+  def ensure_completed_order
+    @order = Spree::Order.find_by(number: params[:id])
+    redirect_back(fallback_location: potepan_cart_path) if @order.state != "complete"
+  end
 
   def store_guest_token
     cookies.permanent.signed[:guest_token] = params[:token] if params[:token]

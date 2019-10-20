@@ -2,10 +2,21 @@ require 'rails_helper'
 
 RSpec.describe "Potepan::Orders", type: :request do
   let!(:variant) { create(:variant) }
-  let!(:store) { create(:store) }
+  let(:store) { create(:store) }
 
   before do
-    current_store = store # rubocop: disable Lint/UselessAssignment
+    allow_any_instance_of(Potepan::CheckoutController).to receive_messages(current_store: store)
+  end
+
+  describe "GET /potepan/order/:id" do
+    let!(:order) { create(:order_with_line_items) }
+
+    context "orderがcompleteでない場合"
+    it "cartページにリダイレクトされる" do
+      allow_any_instance_of(Potepan::OrdersController).to receive_messages(current_order: order)
+      get potepan_order_path(order)
+      expect(response).to redirect_to(potepan_cart_path)
+    end
   end
 
   describe "POST /potepan/orders/create" do
@@ -28,7 +39,7 @@ RSpec.describe "Potepan::Orders", type: :request do
       end
 
       before do
-        current_order_stub
+        allow_any_instance_of(Potepan::OrdersController).to receive_messages(current_order: order)
       end
 
       it "既存のorderにlineitemが追加される" do
@@ -58,7 +69,7 @@ RSpec.describe "Potepan::Orders", type: :request do
 
     context 'ユーザーがいる場合' do
       before do
-        current_order_stub
+        allow_any_instance_of(Potepan::OrdersController).to receive_messages(current_order: order)
         sign_in user
       end
 
@@ -72,34 +83,54 @@ RSpec.describe "Potepan::Orders", type: :request do
   describe "POST /potepan/orders/:number/update" do
     let!(:order) { create(:order) }
 
-    context '#assign_order' do
-      it "current_orderがなくリダイレクトされる" do
-        patch potepan_order_path(order)
-        expect(response).to redirect_to(potepan_root_path)
+    context 'current_orderがない' do
+      context '#assign_order' do
+        it "リダイレクトされる" do
+          patch potepan_order_path(order)
+          expect(response).to redirect_to(potepan_root_path)
+        end
       end
     end
 
-    context '#order_params' do
+    context 'current_orderがある' do
       before do
-        current_order_stub
+        allow_any_instance_of(Potepan::OrdersController).to receive_messages(current_order: order)
       end
 
-      it "paramsが正しくないため、リダイレクトされる" do
-        patch potepan_order_path(order), params:  {
-          order:  {
-            line_items_attributes:  {
-              id: nil,
-              variant: "variant_id",
-              quantity: "1",
+      context '#lock_order' do
+        it "lock_orderでエラーが発生しリダイレクトされる" do
+          expect(Spree::OrderMutex).
+            to receive_message_chain('expired.where.delete_all').
+            and_raise(Spree::OrderMutex::LockFailed)
+          patch potepan_order_path(order)
+          expect(response).to redirect_to(potepan_cart_path)
+        end
+      end
+
+      context '#order_params' do
+        it "paramsが正しくないため、リダイレクトされる" do
+          patch potepan_order_path(order), params:  {
+            order:  {
+              line_items_attributes:  {
+                id: nil,
+                variant: "variant_id",
+                quantity: "1",
+              },
             },
-          },
-        }
-        expect(response).to redirect_to(potepan_cart_path)
+          }
+          expect(response).to redirect_to(potepan_cart_path)
+        end
+      end
+
+      context "shipmentが存在する時" do
+        let(:order) { create(:order_with_line_items) }
+
+        it "shipmentが上書きされる" do
+          old_shipment = order.shipments.deep_dup
+          patch potepan_order_path(order), params: { variant_id: variant.id, quantity: "2" }
+          expect(order.reload).not_to eq old_shipment
+        end
       end
     end
-  end
-
-  def current_order_stub
-    allow(Spree::Order).to receive_message_chain('incomplete.lock.find_by').and_return(order)
   end
 end

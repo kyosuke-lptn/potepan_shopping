@@ -27,8 +27,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="topbar-shoppting-cart"><i class="fa fa-shopping-cart"></i></a>
             <ul class="dropdown-menu dropdown-menu-right">
+              <li>Item(s) in your cart</li>
               <% if current_order %>
-                <li>Item(s) in your cart</li>
                 <% current_order.line_items.each do |item| %>
                   <li>
                     <%= link_to potepan_product_path(item.product) do %>
@@ -47,6 +47,8 @@
                     <%= button_tag "Checkout", type: 'button', onclick: "link_to('#{potepan_checkout_state_path(current_order.state)}')", class: "btn btn-default" %>
                   </div>
                 </li>
+              <% else %>
+                <li>カートに追加された商品はありません。</li>
               <% end %>
             </ul>
           </li>

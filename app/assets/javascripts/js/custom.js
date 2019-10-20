@@ -305,6 +305,8 @@ jQuery(document).ready(function() {
 });
 jQuery(document).ready(function() {
   $(".form-group.col-sm-6.col-xs-12 select").attr("class", "form-control");
+  $("#payment_source_2_expiry_1i").attr("class", "form-control")
+  $("#payment_source_2_expiry_2i").attr("class", "form-control")
 });
 //============================== FOOTER COPYRIGHT =========================
 

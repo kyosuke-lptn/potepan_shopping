@@ -1,0 +1,31 @@
+<%= "#{@order.billing_lastname} #{@order.billing_firstname}様" %>
+
+<%= @store.name %>をご利用いただき誠にありがとうございます。
+ご購入いただきました商品についてメールにて通知させていただきます。
+============================================================
+ご注文内容　（<%= @order.line_items.count %>点）
+============================================================
+[ご注文番号]
+<%= @order.number %>
+
+[お届け先情報]
+<%= @order.ship_address.zipcode %>
+<%= "#{@order.ship_address.country.try(:name)}  #{@order.ship_address.state.name}" %>
+<%= "#{@order.ship_address.city}  #{@order.ship_address.address1}" %>
+-----------------------------------------------------------
+<% @order.line_items.each_with_index do |item, number| %>
+  【<%= number+1 %>】 <%= item.name %> <%= ": #{item.variant.options_text}" unless item.variant.is_master? %>
+価格　：　<%= Spree::Money.parse((item.total_excluding_vat / item.quantity)) %>
+数量　：　<%= item.quantity %>点
+小計　：　<%= item.display_total_excluding_vat %>
+-----------------------------------------------------------
+<% end %>
+小計　：　<%= "¥#{@order.item_total_excluding_vat.round}" %>
+消費税：　<%= @order.display_included_tax_total %>
+配送料：　<%= @order.display_ship_total %>
+総計　：　<%= @order.display_total %>
+============================================================
+
+またのご利用をお待ちしております。
+
+<%= @store.name %>

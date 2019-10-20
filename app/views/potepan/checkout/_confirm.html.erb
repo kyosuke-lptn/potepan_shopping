@@ -1,0 +1,99 @@
+<%= provide(:header_title, "お支払い方法") %>
+<!-- MAIN CONTENT SECTION -->
+<section class="mainContent clearfix stepsWrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="innerWrapper clearfix stepsPage">
+          <div class="row progress-wizard" style="border-bottom:0;">
+            <div class="col-xs-4 progress-wizard-step complete fullBar">
+              <div class="text-center progress-wizard-stepnum">お届け先情報</div>
+              <div class="progress"><div class="progress-bar"></div></div>
+              <i class="progress-wizard-dot"></i>
+            </div>
+            <div class="col-xs-4 progress-wizard-step complete fullBar">
+              <div class="text-center progress-wizard-stepnum">お支払い方法</div>
+              <div class="progress"><div class="progress-bar"></div></div>
+              <i class="progress-wizard-dot"></i>
+            </div>
+            <div class="col-xs-4 progress-wizard-step complete">
+              <div class="text-center progress-wizard-stepnum">入力内容確認</div>
+              <div class="progress"><div class="progress-bar"></div></div>
+              <i class="progress-wizard-dot"></i>
+            </div>
+          </div>
+          <form action="" class="row" method="POST" role="form">
+            <div class="col-xs-12">
+              <div class="page-header">
+                <h4>入力内容確認</h4>
+              </div>
+            </div>
+            <div class="col-sm-12 col-xs-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">お届け先情報</h4>
+                </div>
+                <div class="panel-body">
+                  <address>
+                    <strong><%= @order.name %></strong><br>
+                    <%= @order.ship_address.zipcode %><br>
+                    <%= "#{@order.ship_address.country.try(:name)}  #{@order.ship_address.state.name}" %><br>
+                    <%= "#{@order.ship_address.city}  #{@order.ship_address.address1}" %>
+                  </address>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="cartListInner">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>商品名</th>
+                        <th>価格（税抜）</th>
+                        <th>数</th>
+                        <th>小計（税抜）</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @order.line_items.each do |item| %>
+                        <tr class="lineitem">
+                          <td class="col-xs-2">
+                            <span class="cartImage"><%= image_tag item.variant.display_image.attachment(:mini), alt: 'image' %></span>
+                          </td>
+                          <td class="col-xs-4"><%= link_to line_item_name(item), potepan_product_path(item.product), class: "cart-product-name" %></td>
+                          <td class="col-xs-2"><%= "¥#{(item.total_excluding_vat / item.quantity).round}" %></td>
+                          <td class="col-xs-2"><%= item.quantity %></td>
+                          <td class="col-xs-2"><%= item.display_total_excluding_vat %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row totalAmountArea">
+                  <div class="col-sm-4 col-sm-offset-8 col-xs-12">
+                    <ul class="list-unstyled">
+                      <li>小計 <span id="subtotal-cart"><%= "¥#{@order.item_total_excluding_vat.round}" %></span></li>
+                      <li>消費税 <span id="tax-amount"><%= @order.display_included_tax_total %></span></li>
+                      <li>配送料 <span id="tax-amount"><%= @order.display_ship_total %></span></li>
+                      <li>総計 <span class="grandTotal"><%= @order.display_total %></span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="well well-lg clearfix cartListInner">
+                <ul class="pager checkBtnArea" id="address-button">
+                  <li class="previous"><%= link_to "back", potepan_checkout_state_path("payment") %></li>
+                  <li class="next"><%= link_to "購入確定", potepan_update_checkout_path(@order.state), method: :patch %></li>
+                </ul>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

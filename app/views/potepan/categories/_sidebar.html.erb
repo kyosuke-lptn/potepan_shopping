@@ -13,7 +13,7 @@
       <ul class="list-unstyled">
         <% option_type.value_name("Color").each do |color| %>
           <li>
-            <%= link_to potepan_category_path(color: color) do %>
+            <%= link_to potepan_category_path(@taxon.id, color: color) do %>
               <%= color %>
               <%= tag.span "(#{ProductSearchForm.new(taxon: filter_taxon, color: color).search.unscope(:includes, :order).size.length})" %>
             <% end %>
@@ -28,7 +28,7 @@
       <ul class="list-unstyled clearfix">
         <% option_type.value_name("Size").each do |size| %>
           <li>
-            <%= link_to potepan_category_path(size: size) do %>
+            <%= link_to potepan_category_path(@taxon.id, size: size) do %>
               <%= size %>
               <%= tag.span "(#{ProductSearchForm.new(taxon: filter_taxon, size: size).search.unscope(:includes, :order).size.length})" %>
             <% end %>

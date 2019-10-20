@@ -27,7 +27,7 @@ describe 'order機能', type: :system do
   let(:country) { create(:country, iso: "JP") }
 
   before do
-    current_store = store # rubocop: disable Lint/UselessAssignment
+    allow_any_instance_of(Potepan::CheckoutController).to receive_messages(current_store: store)
   end
 
   it "カートに追加から購入までの流れ", js: true do

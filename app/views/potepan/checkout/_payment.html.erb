@@ -6,90 +6,57 @@
       <div class="col-xs-12">
         <div class="innerWrapper clearfix stepsPage">
           <div class="row progress-wizard" style="border-bottom:0;">
-
             <div class="col-xs-4 progress-wizard-step complete fullBar">
               <div class="text-center progress-wizard-stepnum">お届け先情報</div>
               <div class="progress"><div class="progress-bar"></div></div>
               <i class="progress-wizard-dot"></i>
             </div>
-
             <div class="col-xs-4 progress-wizard-step active">
               <div class="text-center progress-wizard-stepnum">お支払い方法</div>
               <div class="progress"><div class="progress-bar"></div></div>
               <i class="progress-wizard-dot"></i>
             </div>
-
             <div class="col-xs-4 progress-wizard-step disabled">
               <div class="text-center progress-wizard-stepnum">入力内容確認</div>
               <div class="progress"><div class="progress-bar"></div></div>
               <i class="progress-wizard-dot"></i>
             </div>
-
           </div>
-
-          <form action="" class="row" method="POST" role="form">
+          <%= form_with model: @order, url: potepan_update_checkout_path(@order.state), class: "row", local: true do |order_form| %>
+            <%= render 'shared/error_messages', object: order_form.object %>
             <div class="col-xs-12">
               <div class="page-header">
                 <h4>お支払い方法</h4>
               </div>
             </div>
-
-            <div class="form-group col-sm-4 col-xs-12">
-              <label for="checkout-creditcard-code">カード番号</label>
-              <input type="password" class="form-control" id="checkout-card-number">
+            <%= hidden_field_tag "order[payments_attributes][][payment_method_id]", @payment_method_id %>
+            <div class="form-group col-sm-6 col-xs-12">
+              <%= label_tag "checkout-card-number", 'カード番号' %>
+              <%= telephone_field "payment_source[#{@payment_method_id}]", "number", id: "checkout-card-number", class: "form-control", autocomplete: "cc-number" %>
             </div>
-            <div class="form-group col-sm-4 col-xs-12">
-              <label for="">有効期限</label>
-              <div class="row">
-                <div class="col-xs-6">
-                  <span class="step-drop">
-                    <select name="checkout-card-expiration-month" id="checkout-card-expiration-month" class="select-drop">
-                      <option value="1">01</option>
-                      <option value="2">02</option>
-                      <option value="3">03</option>
-                      <option value="4">04</option>
-                      <option value="5">05</option>
-                      <option value="6">06</option>
-                      <option value="7">07</option>
-                      <option value="8">08</option>
-                      <option value="9">09</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-
-                    </select>
-                  </span>
-                </div>
-                <div class="col-xs-6">
-                  <span class="step-drop">
-                    <select name="checkout-card-expiration-year" id="checkout-card-expiration-year" class="select-drop">
-                      <option value="0">2016</option>
-                      <option value="1">2017</option>
-                      <option value="2">2018</option>
-                      <option value="3">2019</option>
-                      <option value="4">2020</option>
-                      <option value="5">2021</option>
-                      <option value="6">2022</option>
-                      <option value="7">2023</option>
-                      <option value="8">2024</option>
-                    </select>
-                  </span>
-                </div>
+            <div class="form-group col-sm-6 col-xs-12">
+              <%= label_tag "checkout-card-expiration", '有効期限' %>
+              <div id="checkout-card-expiration">
+                <%= date_select "payment_source[#{@payment_method_id}][expiry]", "value", use_month_numbers: true, start_year: Date.today.year, end_year: Date.today.year+10, date_separator: '/', default: Date.current, :discard_day => true, order: [:month, :year], id: "checkout-card-number", class: "form-control", autocomplete: "cc-exp" %>
               </div>
             </div>
-            <div class="form-group col-sm-4 col-xs-12">
-              <label for="checkout-card-name">カード名義人</label>
-              <input type="text" class="form-control" id="checkout-card-name">
+            <div class="form-group col-sm-6 col-xs-12">
+              <%= label_tag "checkout-card-name", "カード名義人" %>
+              <%= text_field_tag "payment_source[#{@payment_method_id}][name]", "#{@order.billing_firstname} #{@order.billing_lastname}", id: "checkout-card-name", class: "form-control", autocomplete: "cc-name" %>
+            </div>
+            <div class="form-group col-sm-6 col-xs-12">
+              <%= label_tag "checkout-card-secure-code", 'セキュリティコード' %>
+              <%= telephone_field "payment_source[#{@payment_method_id}]", "verification_value", id: "checkout-card-secure-code", class: "form-control", autocomplete: "cc-csc", maxlength: 3 %>
             </div>
             <div class="col-xs-12">
-              <div class="well well-lg clearfix">
-                <ul class="pager">
-                <li class="previous"><a href="checkout_step_1.html">戻る</a></li>
-                  <li class="next"><a href="checkout_step_3.html">次へ</a></li>
+              <div class="well well-lg clearfix cartListInner">
+                <ul class="pager checkBtnArea" id="address-button">
+                  <li class="previous"><%= link_to "back", potepan_checkout_state_path("address") %></li>
+                  <li class="next"><%= order_form.submit "次へ", class: "btn btn-primary btn-block", aria: { hidden: true } %></li>
                 </ul>
               </div>
             </div>
-          </form>
+          <% end %>
         </div>
       </div>
     </div>

@@ -67,4 +67,7 @@ RSpec.configure do |config|
 
   # ProductHelper
   config.include Potepan::ProductsHelper
+
+  # odermodule
+  config.include TestingSupport::OrderWalkthrough
 end

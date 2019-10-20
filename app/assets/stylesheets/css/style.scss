@@ -1924,7 +1924,10 @@ input#basic-addon2 {
 }
 
 /*=== 3.6 STEPS PAGE FORM ===*/
-div.cartListInner > ul.address-button{
+div#checkout-card-expiration{
+  display: flex;
+}
+ul#address-button{
   border: none;
 }
 .stepsPage form {
