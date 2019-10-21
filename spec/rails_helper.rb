@@ -65,9 +65,6 @@ RSpec.configure do |config|
   # FactoryBot
   config.include FactoryBot::Syntax::Methods
 
-  # ProductHelper
-  config.include Potepan::ProductsHelper
-
   # odermodule
   config.include TestingSupport::OrderWalkthrough
 end

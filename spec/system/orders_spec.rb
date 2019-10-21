@@ -65,7 +65,7 @@ describe 'order機能', type: :system do
 
       find('#topbar-shoppting-cart').hover
       expect(page).to have_content product.name.upcase
-      expect(page).to have_content product.price
+      # expect(page).to have_content product.price
       expect(page).to have_button "Shopping Cart"
       expect(page).to have_button "Checkout"
       click_link new_product.name
@@ -93,6 +93,4 @@ describe 'order機能', type: :system do
       expect(page).to have_link "買い物を続ける"
     end
   end
-  #   shipmentをすでに入力していればorderに追加される・promotionがあれば適用される・ユーザー情報についても同様
-  #   promotionの適用
 end

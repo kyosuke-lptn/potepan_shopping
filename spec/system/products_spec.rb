@@ -13,7 +13,7 @@ describe 'Products機能', type: :system do
     aggregate_failures do
       expect(page).to have_title "#{product.name} - BIGBAG Store"
       expect(page).to have_content product.name
-      expect(page).to have_content display_price(product)
+      expect(page).to have_content product.display_price
       expect(page).to have_content product.description
       expect(page).not_to have_content "只今、在庫がない状態です。ご注文は可能ですが、入荷次第の配送になります。"
       img = first(".item").find("img")
@@ -22,7 +22,7 @@ describe 'Products機能', type: :system do
       expect(img[:alt]).to eq 'product-thumb-img'
       within '#taxon-product' do
         expect(page).to have_link taxon_product.name
-        expect(page).to have_content display_price(taxon_product)
+        expect(page).to have_content taxon_product.display_price
         expect(page).not_to have_content product.name
       end
     end

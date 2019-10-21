@@ -36,5 +36,8 @@ module Potepanec
       g.javascripts false
       g.helper false
     end
+
+    # i18n
+    config.i18n.default_locale = :ja
   end
 end

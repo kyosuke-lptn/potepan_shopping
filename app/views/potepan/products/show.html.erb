@@ -44,7 +44,7 @@
               </li>
             </ul>
             <h2><%= @product.name %></h2>
-            <h3><%= display_price(@product) %></h3>
+            <h3><%= @product.display_price %></h3>
             <p><%= product_description(@product) %></p>
             <%= render 'cart_form', product: @product %>
           </div>

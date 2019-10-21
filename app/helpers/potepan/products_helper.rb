@@ -12,10 +12,6 @@ module Potepan
       end
     end
 
-    def display_price(product_or_variant)
-      product_or_variant.price_for(Spree::Config.default_pricing_options).to_html
-    end
-
     MAXIMUM_NUMBER_OF_DISPLAYS = 4
 
     def taxon_products(product_taxons, exclude_product_id)

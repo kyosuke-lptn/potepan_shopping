@@ -57,7 +57,7 @@
               <div class="totalAmountArea">
                 <div class="col-sm-4 col-sm-offset-8 col-xs-12">
                   <ul class="list-unstyled">
-                    <li>小計 <span id="subtotal-cart"><%= @order.item_total_excluding_vat %></span></li>
+                    <li>小計 <span id="subtotal-cart"><%= Spree::Money.parse(@order.item_total_excluding_vat) %></span></li>
                     <li>消費税 <span id="tax-amount"><%= @order.display_included_tax_total %></span></li>
                     <li>総計 <span class="grandTotal"><%= @order.display_total %></span></li>
                   </ul>

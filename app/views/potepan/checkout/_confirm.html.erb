@@ -63,7 +63,7 @@
                             <span class="cartImage"><%= image_tag item.variant.display_image.attachment(:mini), alt: 'image' %></span>
                           </td>
                           <td class="col-xs-4"><%= link_to line_item_name(item), potepan_product_path(item.product), class: "cart-product-name" %></td>
-                          <td class="col-xs-2"><%= "¥#{(item.total_excluding_vat / item.quantity).round}" %></td>
+                          <td class="col-xs-2"><%= Spree::Money.parse((item.total_excluding_vat / item.quantity)) %></td>
                           <td class="col-xs-2"><%= item.quantity %></td>
                           <td class="col-xs-2"><%= item.display_total_excluding_vat %></td>
                         </tr>
@@ -74,7 +74,7 @@
                 <div class="row totalAmountArea">
                   <div class="col-sm-4 col-sm-offset-8 col-xs-12">
                     <ul class="list-unstyled">
-                      <li>小計 <span id="subtotal-cart"><%= "¥#{@order.item_total_excluding_vat.round}" %></span></li>
+                      <li>小計 <span id="subtotal-cart"><%= Spree::Money.parse(@order.item_total_excluding_vat) %></span></li>
                       <li>消費税 <span id="tax-amount"><%= @order.display_included_tax_total %></span></li>
                       <li>配送料 <span id="tax-amount"><%= @order.display_ship_total %></span></li>
                       <li>総計 <span class="grandTotal"><%= @order.display_total %></span></li>
