@@ -20,7 +20,8 @@
 /public/spree
 /public/assets
 /public/img
-/vendor
+/vendor/*
+!/vendor/assets/
 
 ### https://raw.github.com/github/gitignore/515d7fcbbab869614a342a29c56d2010b7d8576d/Node.gitignore
 
