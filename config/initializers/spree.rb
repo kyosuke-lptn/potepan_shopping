@@ -47,6 +47,8 @@ Spree.config do |config|
   #   server: Rails.env.production? ? 'production' : 'test',
   #   test_mode: !Rails.env.production?
   # )
+
+  config.default_url_host = 'potepan-shopping.herokuapp.com'
 end
 
 Spree::Frontend::Config.configure do |config|

@@ -41,7 +41,5 @@ module Potepanec
     config.i18n.default_locale = :ja
     config.i18n.fallbacks = [I18n.default_locale]
     Money.locale_backend = :i18n
-
-    Rails.application.routes.default_url_options[:host] = 'potepan-shopping.herokuapp.com'
   end
 end
