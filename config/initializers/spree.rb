@@ -54,7 +54,7 @@ Spree::Frontend::Config.configure do |config|
 end
 
 Spree::Backend::Config.configure do |config|
-  config.locale = 'ja'
+  config.locale = 'en'
 end
 
 Spree::Api::Config.configure do |config|
