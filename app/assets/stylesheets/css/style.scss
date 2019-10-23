@@ -230,31 +230,7 @@ a:hover, a:focus {
   font-size: 12px;
   display: inline-block;
 }
-.topBar ul.pull-right li:first-child span small {
-  color: #a7a7a7;
-  padding: 0 5px;
-}
-.topBar ul.pull-right li:first-child span a {
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-.topBar ul.pull-right li:first-child span a:hover {
-  color: #a7a7a7;
-}
-.topBar ul.pull-right li:first-child span a:focus {
-  color: #d9d9d9;
-}
-.topBar ul.pull-right li:first-child::after {
-  content: "|";
-  padding-left: 13px;
-  font-size: 16px;
-  color: #d9d9d9;
-  opacity: .15;
-}
-.topBar ul.pull-right li:nth-child(2) a {
+.topBar ul.pull-right li:first-child a {
   color: #ffffff;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -263,37 +239,37 @@ a:hover, a:focus {
   transition: all 0.3s ease-in-out;
   padding: 0 10px;
 }
-.topBar ul.pull-right li:nth-child(2) a:hover {
+.topBar ul.pull-right li:first-child a:hover {
   opacity: .5;
 }
-.topBar ul.pull-right li:nth-child(2) .dropdown-menu {
+.topBar ul.pull-right li:first-child .dropdown-menu {
   padding: 10px 15px;
   border-radius: 0;
 }
 @media (max-width: 479px) {
-  .topBar ul.pull-right li:nth-child(2) .dropdown-menu {
+  .topBar ul.pull-right li:first-child .dropdown-menu {
     width: 280px;
     margin: 0 -65px 0 0;
   }
 }
 @media (min-width: 480px) {
-  .topBar ul.pull-right li:nth-child(2) .dropdown-menu {
+  .topBar ul.pull-right li:first-child .dropdown-menu {
     width: 350px;
     margin: 0;
   }
 }
-.topBar ul.pull-right li:nth-child(2) .dropdown-menu li {
+.topBar ul.pull-right li:first-child .dropdown-menu li {
   line-height: 0;
   width: 100%;
 }
-.topBar ul.pull-right li:nth-child(2) .dropdown-menu li .input-group .form-control {
+.topBar ul.pull-right li:first-child .dropdown-menu li .input-group .form-control {
   box-shadow: none;
   border-radius: 0;
 }
-.topBar ul.pull-right li:nth-child(2) .dropdown-menu li .input-group .form-control:focus {
+.topBar ul.pull-right li:first-child .dropdown-menu li .input-group .form-control:focus {
   border-color: #47bac1;
 }
-.topBar ul.pull-right li:nth-child(2) .dropdown-menu li .input-group .input-group-addon {
+.topBar ul.pull-right li:first-child .dropdown-menu li .input-group .input-group-addon {
   border-radius: 0;
   background-color: #47bac1;
   color: #ffffff;
