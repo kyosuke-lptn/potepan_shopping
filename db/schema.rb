@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_043529) do
+ActiveRecord::Schema.define(version: 2019_10_24_070318) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -896,7 +896,6 @@ ActiveRecord::Schema.define(version: 2019_10_24_043529) do
     t.integer "originator_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
-    t.integer "update_reason_id"
     t.decimal "amount_remaining", precision: 8, scale: 2
     t.integer "store_credit_reason_id"
     t.index ["deleted_at"], name: "index_spree_store_credit_events_on_deleted_at"
@@ -916,12 +915,6 @@ ActiveRecord::Schema.define(version: 2019_10_24_043529) do
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
     t.index ["priority"], name: "index_spree_store_credit_types_on_priority"
-  end
-
-  create_table "spree_store_credit_update_reasons", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6
-    t.datetime "updated_at", precision: 6
   end
 
   create_table "spree_store_credits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -104,5 +104,6 @@ Rails.application.configure do
     bucket: 'potepanec20191023'
   }
 
-  config.default_url_options = { host: "https://potepan-shopping.herokuapp.com" }
+  config.default_url_options = { host: "potepan-shopping.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: "potepan-shopping.herokuapp.com" }
 end
