@@ -19,6 +19,8 @@ describe 'checkout機能', type: :system do
         to receive_messages(current_order: @order)
       allow_any_instance_of(Potepan::OrdersController).
         to receive_messages(current_order: @order)
+      allow_any_instance_of(Potepan::OrdersController).
+        to receive_messages(current_store: @store)
     end
 
     it "お客様の情報入力手順" do

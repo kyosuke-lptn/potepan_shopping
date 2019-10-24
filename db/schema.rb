@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_22_105239) do
+ActiveRecord::Schema.define(version: 2019_10_24_043529) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -561,7 +561,6 @@ ActiveRecord::Schema.define(version: 2018_09_22_105239) do
     t.string "type"
     t.integer "usage_limit"
     t.string "match_policy", default: "all"
-    t.string "code"
     t.boolean "advertise", default: false
     t.string "path"
     t.datetime "created_at", precision: 6
@@ -571,7 +570,6 @@ ActiveRecord::Schema.define(version: 2018_09_22_105239) do
     t.boolean "apply_automatically", default: false
     t.index ["advertise"], name: "index_spree_promotions_on_advertise"
     t.index ["apply_automatically"], name: "index_spree_promotions_on_apply_automatically"
-    t.index ["code"], name: "index_spree_promotions_on_code"
     t.index ["expires_at"], name: "index_spree_promotions_on_expires_at"
     t.index ["id", "type"], name: "index_spree_promotions_on_id_and_type"
     t.index ["promotion_category_id"], name: "index_spree_promotions_on_promotion_category_id"
@@ -900,8 +898,16 @@ ActiveRecord::Schema.define(version: 2018_09_22_105239) do
     t.datetime "updated_at", precision: 6
     t.integer "update_reason_id"
     t.decimal "amount_remaining", precision: 8, scale: 2
+    t.integer "store_credit_reason_id"
     t.index ["deleted_at"], name: "index_spree_store_credit_events_on_deleted_at"
     t.index ["store_credit_id"], name: "index_spree_store_credit_events_on_store_credit_id"
+  end
+
+  create_table "spree_store_credit_reasons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "spree_store_credit_types", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
