@@ -308,6 +308,25 @@ jQuery(document).ready(function() {
   $("#payment_source_2_expiry_1i").attr("class", "form-control")
   $("#payment_source_2_expiry_2i").attr("class", "form-control")
 });
+//============================== ADDRESS FORM =========================
+jQuery(document).ready(function() {
+  var useBilling = $("input#order_use_billing")
+
+  useBilling.change(function() {
+    $('.shipping_info_form').fadeToggle();
+  	if ($(this).prop('checked') == true) {
+  		$('div#bill-form-header').css('border-bottom', 'none');
+    } else {
+  		$('div#bill-form-header').css({
+  			'border-bottom': '5px solid #e4e4e4'
+      });
+    }
+  });
+
+  $('.shipping_info_form').hide();
+  $('div#bill-form-header').css('border-bottom', 'none');
+});
+
 //============================== FOOTER COPYRIGHT =========================
 
 // コンテンツが少ない時にfooterをbottom:0にする footerFixed.js

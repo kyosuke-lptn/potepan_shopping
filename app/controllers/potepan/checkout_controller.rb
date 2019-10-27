@@ -45,7 +45,6 @@ class Potepan::CheckoutController < ApplicationController
   def massaged_params
     massaged_params = params.deep_dup
     move_and_modifay_payment_source_into_payments_attributes(massaged_params)
-    # move_wallet_payment_source_id_into_payments_attributes(massaged_params) => userにwalletを付属できるようになれば加える
     set_payment_parameters_amount(massaged_params, @order)
     massaged_params
   end

@@ -23,62 +23,112 @@
             </div>
           </div>
           <%= form_for @order, url: potepan_update_checkout_path(@order.state), html: { class: "row", role: "form", id: "checkout_form_address" } do |order_form| %>
+
             <div class="col-xs-12">
               <%= render 'shared/error_messages', object: order_form.object %>
               <div class="page-header">
-                <h4>入力フォーム</h4>
+                <h4>請求先</h4>
               </div>
             </div>
-            <%= order_form.fields_for :ship_address do |ship_form| %>
-              <div class="form-group col-sm-6 col-xs-12">
-                <%= label_tag 'checkout-family-name', '姓' %>
-                <%= ship_form.text_field :lastname, id: "checkout-family-name", class: "form-control" %>
-              </div>
-              <div class="form-group col-sm-6 col-xs-12">
-                <%= label_tag 'checkout-first-name', '名' %>
-                <%= ship_form.text_field :firstname, id: "checkout-first-name", class: "form-control" %>
-              </div>
-
+            <div class="billing_info_form">
+              <%= order_form.fields_for :bill_address do |bill_form| %>
                 <div class="form-group col-sm-6 col-xs-12">
-                  <%= label_tag 'checkout-email', 'メールアドレス' %>
-                  <%= order_form.email_field :email, id: "checkout-email", class: "form-control" %>
+                  <%= bill_form.label :lastname, '姓' %>
+                  <%= bill_form.text_field :lastname, class: "form-control" %>
                 </div>
                 <div class="form-group col-sm-6 col-xs-12">
-                  <%= label_tag 'checkout-telephone', '電話番号' %>
-                  <%= ship_form.telephone_field :phone, id: "checkout-telephone", class: "form-control", pattern: "[0-9]{2,3}-[0-9]{3,4}-[0-9]{4,5}", title: "電話番号は、ハイフン（-）を入れて記入してください。"%>
+                  <%= bill_form.label :firstname, '名' %>
+                  <%= bill_form.text_field :firstname, class: "form-control" %>
                 </div>
 
                 <div class="form-group col-sm-6 col-xs-12">
-                  <%= label_tag 'checkout-zipcode', '郵便番号' %>
-                  <%= ship_form.telephone_field :zipcode, id: "checkout-zipcode", class: "form-control", pattern: "[0-9]{3}-[0-9]{4}", title: "郵便番号は、ハイフン（-）を入れて記入してください。", maxlength: 8 %>
+                  <%= order_form.label :email, 'メールアドレス' %>
+                  <%= order_form.email_field :email, class: "form-control" %>
                 </div>
                 <div class="form-group col-sm-6 col-xs-12">
-                  <%= label_tag 'order_ship_address_attributes_country_id', '国' %>
+                  <%= bill_form.label :phone, '電話番号' %>
+                  <%= bill_form.telephone_field :phone, class: "form-control", pattern: "[0-9]{2,3}-[0-9]{3,4}-[0-9]{4,5}", title: "電話番号は、ハイフン（-）を入れて記入してください。"%>
+                </div>
+
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= bill_form.label :zipcode, '郵便番号' %>
+                  <%= bill_form.telephone_field :zipcode, class: "form-control", pattern: "[0-9]{3}-[0-9]{4}", title: "郵便番号は、ハイフン（-）を入れて記入してください。", maxlength: 8 %>
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= bill_form.label :country_id, '国' %>
+                  <%= bill_form.collection_select :country_id, [Spree::Country.find_by(name: "Japan")], :id, :name %>
+                </div>
+
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= bill_form.label :state_id, '都道府県' %>
+                  <%= bill_form.collection_select :state_id, Spree::State.where(country_id: Spree::Country.find_by(name: "Japan").id), :id, :name %>
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= bill_form.label :city, '市' %>
+                  <%= bill_form.text_field :city, class: "form-control" %>
+                </div>
+
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= bill_form.label :address1, '住所' %>
+                  <%= bill_form.text_field :address1, class: "form-control" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-xs-12">
+              <div class="page-header"  id="bill-form-header">
+                <h4>配送先</h4>
+                <%= order_form.check_box :use_billing, checked: true %>
+                <%= order_form.label :use_billing, "請求先の情報を使う" %>
+              </div>
+            </div>
+            <div class="shipping_info_form">
+              <%= order_form.fields_for :ship_address do |ship_form| %>
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= ship_form.label :lastname, '姓' %>
+                  <%= ship_form.text_field :lastname, class: "form-control" %>
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= ship_form.label :firstname, '名' %>
+                  <%= ship_form.text_field :firstname, class: "form-control" %>
+                </div>
+
+
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= ship_form.label :phone, '電話番号' %>
+                  <%= ship_form.telephone_field :phone, class: "form-control", pattern: "[0-9]{2,3}-[0-9]{3,4}-[0-9]{4,5}", title: "電話番号は、ハイフン（-）を入れて記入してください。"%>
+                </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= ship_form.label :zipcode, '郵便番号' %>
+                  <%= ship_form.telephone_field :zipcode, class: "form-control", pattern: "[0-9]{3}-[0-9]{4}", title: "郵便番号は、ハイフン（-）を入れて記入してください。", maxlength: 8 %>
+                </div>
+
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= ship_form.label :country_id, '国' %>
                   <%= ship_form.collection_select :country_id, [Spree::Country.find_by(name: "Japan")], :id, :name %>
                 </div>
-
                 <div class="form-group col-sm-6 col-xs-12">
-                  <%= label_tag 'order_ship_address_attributes_state_id', '都道府県' %>
+                  <%= ship_form.label :state_id, '都道府県' %>
                   <%= ship_form.collection_select :state_id, Spree::State.where(country_id: Spree::Country.find_by(name: "Japan").id), :id, :name %>
                 </div>
-                <div class="form-group col-sm-6 col-xs-12">
-                  <%= label_tag 'checkout-city', '市' %>
-                  <%= ship_form.text_field :city, class: "form-control", id: "checkout-city" %>
-                </div>
 
-              <div class="form-group col-sm-6 col-xs-12">
-                <%= label_tag 'checkout-address', '住所' %>
-                <%= ship_form.text_field :address1, class: "form-control", id: "checkout-address" %>
-              </div>
-              <div class="col-xs-12">
-                <div class="well well-lg clearfix cartListInner">
-                  <ul class="pager checkBtnArea" id="address-button">
-                    <li class="previous"><%= link_to "back", potepan_cart_path %></li>
-                    <li class="next"><%= button_tag "次へ", class: "btn btn-primary btn-block", aria: { hidden: true } %></li>
-                  </ul>
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= ship_form.label :city, '市' %>
+                  <%= ship_form.text_field :city, class: "form-control" %>
                 </div>
+                <div class="form-group col-sm-6 col-xs-12">
+                  <%= ship_form.label :address1, '住所' %>
+                  <%= ship_form.text_field :address1, class: "form-control" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-xs-12">
+              <div class="well well-lg clearfix cartListInner">
+                <ul class="pager checkBtnArea" id="address-button">
+                  <li class="previous"><%= link_to "back", potepan_cart_path %></li>
+                  <li class="next"><%= button_tag "次へ", class: "btn btn-primary btn-block", aria: { hidden: true } %></li>
+                </ul>
               </div>
-            <% end %>
+            </div>
           <% end %>
         </div>
       </div>
