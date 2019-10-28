@@ -284,30 +284,33 @@ jQuery(document).ready(function() {
   });
   changFormAction();
 });
-
-//============================== CART PRODUCT =========================
+//============================== ADDRESS FORM =========================
 jQuery(document).ready(function() {
-	$("form .close").click(function() {
-    $(this)
-      .parents(".lineitem")
-      .first()
-      .find("input.line_item_quantity")
-      .val(0);
-    $(this)
-      .parents("form")
-      .first()
-      .submit();
-    return false;
+  var useBilling = $("input#order_use_billing")
+
+  useBilling.change(function() {
+    $('.shipping_info_form').fadeToggle();
+  	if ($(this).prop('checked') == true) {
+  		$('div#bill-form-header').css('border-bottom', 'none');
+    } else {
+  		$('div#bill-form-header').css({
+  			'border-bottom': '5px solid #e4e4e4'
+      });
+    }
   });
-  $("form#update-cart").submit(function() {
-    $("form#update-cart #update-button").attr("disabled", true);
-  });
+
+  $('.shipping_info_form').hide();
+  $('div#bill-form-header').css('border-bottom', 'none');
 });
+
+
+//============================== PAYMENT FORM =========================
 jQuery(document).ready(function() {
   $(".form-group.col-sm-6.col-xs-12 select").attr("class", "form-control");
   $("#payment_source_2_expiry_1i").attr("class", "form-control")
   $("#payment_source_2_expiry_2i").attr("class", "form-control")
 });
+
 //============================== FOOTER COPYRIGHT =========================
 
 // コンテンツが少ない時にfooterをbottom:0にする footerFixed.js

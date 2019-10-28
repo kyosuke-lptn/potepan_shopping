@@ -11,8 +11,8 @@
             <div class="row">
               <div class="col-sm-6 col-xs-12 tableBlcok">
                 <address>
-                  <span>Shipping address:</span> <a href="mailto:potepan@potepancamp.com">potepan@potepancamp.com</a> <br>
-                  <span>Email:</span> <a href="mailto:potepan@potepancamp.com">potepan@potepancamp.com</a> <br>
+                  <span>Shipping address:</span><%= link_to current_store.mail_from_address, "mailto: #{current_store.mail_from_address}" %><br>
+                  <span>Email:</span><%= link_to current_store.mail_from_address, "mailto: #{current_store.mail_from_address}" %><br>
                   <span>Phone:</span> +884 5452 6432
                 </address>
               </div>

@@ -3,7 +3,7 @@
     <div class="productBox" id="<%= product.id %>">
       <%= link_to potepan_product_path(product) do %>
         <div class="productImage clearfix">
-          <%= image_tag product.display_image.attachment.url(:product), alt: 'products-img' %>
+          <%= image_tag(product.gallery.images.first.url(:product), alt: 'products-img') if product.gallery.images.first.try(:url, :product) %>
         </div>
         <div class="productCaption clearfix">
           <h5><%= product.name %></h5>

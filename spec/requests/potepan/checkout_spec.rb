@@ -235,6 +235,8 @@ RSpec.describe "Potepan::Checkout", type: :request do
     before do
       allow_any_instance_of(Potepan::CheckoutController).
         to receive_messages(current_order: confirm_order)
+      allow_any_instance_of(Potepan::CheckoutController).
+        to receive_messages(current_store: @store)
     end
 
     context "completeに成功した時" do

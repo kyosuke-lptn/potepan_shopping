@@ -2,7 +2,7 @@
 <div class="topBar">
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-xs-12">
+      <div>
         <ul class="list-inline pull-right">
           <li class="dropdown searchBox">
             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
@@ -23,10 +23,10 @@
               <li>Item(s) in your cart</li>
               <% if current_order %>
                 <% current_order.line_items.each do |item| %>
-                  <li>
+                  <li class="<%= "lineitem-#{item.id}" %>">
                     <%= link_to potepan_product_path(item.product) do %>
                       <div class="media">
-                        <%= image_tag item.variant.display_image.attachment(:mini), class: "media-left media-object", alt: 'cart-Image' %>
+                        <%= image_tag(item.variant.gallery.images.first.url(:mini), class: "media-left media-object", alt: 'cart-Image') if item.variant.gallery.images.first.try(:url, :mini) %>
                         <div class="media-body">
                           <h5 class="media-heading"><%= item.name %><br><span><%= item.quantity %> X <%= item.display_price %></span></h5>
                         </div>

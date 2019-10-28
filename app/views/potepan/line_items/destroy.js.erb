@@ -1,0 +1,9 @@
+<% if @order.line_items.present? %>
+  $(".lineitem-<%= @line_item.id %>").hide();
+  $("#subtotal-cart").text("<%= Spree::Money.parse(@order.item_total_excluding_vat) %>");
+  $("#tax-amount").text("<%= @order.display_included_tax_total %>");
+  $(".grandTotal").text("<%= @order.display_total %>");
+<% else %>
+  $("#update-cart").hide();
+  $(".cartListInner").append("<%= escape_javascript(render('potepan/orders/empty_cart')) %>")
+<% end %>

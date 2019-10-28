@@ -9,7 +9,6 @@ module TestingSupport
       @zone = create(:zone, countries: [@country])
       @payment_method = FactoryBot.create(:payment_method)
       @store = FactoryBot.create(:store)
-      # @store = FactoryBot.create(:store, payment_methods: [@payment_method])
 
       # A shipping method must exist for rates to be displayed on checkout page
       FactoryBot.create(:shipping_method, zones: [@zone]).tap do |sm|

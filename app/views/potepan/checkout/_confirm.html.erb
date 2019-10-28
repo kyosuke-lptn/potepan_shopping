@@ -60,7 +60,7 @@
                       <% @order.line_items.each do |item| %>
                         <tr class="lineitem">
                           <td class="col-xs-2">
-                            <span class="cartImage"><%= image_tag item.variant.display_image.attachment(:mini), alt: 'image' %></span>
+                            <span class="cartImage"><%= image_tag(item.variant.gallery.images.first.url(:mini), alt: 'image') if item.variant.gallery.images.first.try(:url, :mini) %></span>
                           </td>
                           <td class="col-xs-4"><%= link_to line_item_name(item), potepan_product_path(item.product), class: "cart-product-name" %></td>
                           <td class="col-xs-2"><%= Spree::Money.parse((item.total_excluding_vat / item.quantity)) %></td>
