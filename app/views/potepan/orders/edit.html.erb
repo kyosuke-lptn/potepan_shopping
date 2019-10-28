@@ -7,12 +7,7 @@
       <div class="col-xs-12">
         <div class="cartListInner">
           <% if @order.line_items.empty? %>
-            <div">
-              <h4>カートに追加された商品はありません。</h4>
-              <%= link_to potepan_root_path, class: 'btn btn-primary btn-block' do %>
-                買い物を続ける
-              <% end %>
-            </div>
+            <%= render 'empty_cart' %>
           <% else %>
             <%= tag.h5(flash[:error], class: "alert alert-danger") if flash[:error].present? %>
             <%= form_for [:potepan, @order], html: { id: "update-cart" } do |order_form| %>
@@ -30,16 +25,16 @@
                   <tbody>
                     <% @order.line_items.each do |item| %>
                       <%= order_form.fields_for :line_items, item do |item_form| %>
-                      <tr class="lineitem">
+                      <tr class="lineitem <%= "lineitem-#{item.id}" %>">
                         <td class="col-xs-2">
-                          <%= link_to "#", class: "close", data: { dismiss: "alert" }, aria: { label: "Close" } do %>
-                          <span aria-hidden="true">&times;</span>
+                          <%= link_to potepan_line_item_path(item), method: :delete, remote: true, class: "close" do %>
+                            <span aria-hidden="true">&times;</span>
                           <% end %>
                           <span class="cartImage"><%= image_tag(item.variant.gallery.images.first.url(:mini), alt: 'image') if item.variant.gallery.images.first.try(:url, :mini) %></span>
                         </td>
                         <td class="col-xs-4"><%= link_to line_item_name(item), potepan_product_path(item.product), class: "cart-product-name" %></td>
                         <td class="col-xs-2"><%= Spree::Money.parse((item.total_excluding_vat / item.quantity)) %></td>
-                        <td class="col-xs-2"><%= item_form.number_field :quantity, value: item.quantity, in: 1..10, id: nil, class: "line_item_quantity" %></td>
+                        <td class="col-xs-2"><%= item_form.select :quantity, item.variant.selectable_quantity %></td>
                         <td class="col-xs-2"><%= item.display_total_excluding_vat %></td>
                       </tr>
                       <% end %>

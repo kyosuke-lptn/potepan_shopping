@@ -23,7 +23,7 @@
               <li>Item(s) in your cart</li>
               <% if current_order %>
                 <% current_order.line_items.each do |item| %>
-                  <li>
+                  <li class="<%= "lineitem-#{item.id}" %>">
                     <%= link_to potepan_product_path(item.product) do %>
                       <div class="media">
                         <%= image_tag(item.variant.gallery.images.first.url(:mini), class: "media-left media-object", alt: 'cart-Image') if item.variant.gallery.images.first.try(:url, :mini) %>

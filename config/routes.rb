@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :products, only: :show
     resources :categories, only: :show
     resources :orders, only: [:show, :create, :edit, :update]
+    resources :line_items, only: [:destroy]
     get :search, to: 'search#show'
     get '/checkout/:state', to: 'checkout#edit', as: :checkout_state
     patch '/checkout/update/:state', to: 'checkout#update', as: :update_checkout

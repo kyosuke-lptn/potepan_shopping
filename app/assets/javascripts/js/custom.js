@@ -284,30 +284,6 @@ jQuery(document).ready(function() {
   });
   changFormAction();
 });
-
-//============================== CART PRODUCT =========================
-jQuery(document).ready(function() {
-	$("form .close").click(function() {
-    $(this)
-      .parents(".lineitem")
-      .first()
-      .find("input.line_item_quantity")
-      .val(0);
-    $(this)
-      .parents("form")
-      .first()
-      .submit();
-    return false;
-  });
-  $("form#update-cart").submit(function() {
-    $("form#update-cart #update-button").attr("disabled", true);
-  });
-});
-jQuery(document).ready(function() {
-  $(".form-group.col-sm-6.col-xs-12 select").attr("class", "form-control");
-  $("#payment_source_2_expiry_1i").attr("class", "form-control")
-  $("#payment_source_2_expiry_2i").attr("class", "form-control")
-});
 //============================== ADDRESS FORM =========================
 jQuery(document).ready(function() {
   var useBilling = $("input#order_use_billing")
@@ -325,6 +301,14 @@ jQuery(document).ready(function() {
 
   $('.shipping_info_form').hide();
   $('div#bill-form-header').css('border-bottom', 'none');
+});
+
+
+//============================== PAYMENT FORM =========================
+jQuery(document).ready(function() {
+  $(".form-group.col-sm-6.col-xs-12 select").attr("class", "form-control");
+  $("#payment_source_2_expiry_1i").attr("class", "form-control")
+  $("#payment_source_2_expiry_2i").attr("class", "form-control")
 });
 
 //============================== FOOTER COPYRIGHT =========================
